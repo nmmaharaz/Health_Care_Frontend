@@ -1,11 +1,11 @@
+import PublicNavbar from "@/components/mvpblocks/PublicNavbar";
 import Footer from "@/components/shared/Footer";
-import Navbar from "@/components/shared/Navbar";
 import React from "react";
 
 export default function layout({children}: {children: React.ReactNode}) {
   return (
     <div className="min-h-screen flex flex-col">
-        <Navbar></Navbar>
+        <PublicNavbar></PublicNavbar>
         <div className="grow">
             {children}
         </div>
