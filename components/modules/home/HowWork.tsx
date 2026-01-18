@@ -17,14 +17,14 @@ const steps: Step[] = [
 
 const HowWeWork: React.FC = () => {
     return (
-        <section className="bg-[#f9faff] mx-7.5 py-20 px-6 rounded-[40px] relative overflow-hidden">
+        <section className="bg-[#f4f6ff] mx-7.5 py-20 px-6 rounded-[40px] relative overflow-hidden">
             {/* Header Section */}
             <div className="text-center max-w-2xl mx-auto mb-16">
                 <div className="flex items-center justify-center gap-2 text-[#7367f0] font-medium mb-4">
                     <span className="text-xl">🩺</span>
                     <span className="text-sm tracking-wide">How We Work</span>
                 </div>
-                <h2 className="text-[#0a1d37] text-4xl md:text-5xl font-bold mb-6">
+                <h2 className="text-center text-4xl mb-6 font-bold">
                     We work to achieve better health outcomes
                 </h2>
                 <p className="text-gray-500 leading-relaxed">
