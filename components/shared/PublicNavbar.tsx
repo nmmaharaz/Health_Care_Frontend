@@ -221,5 +221,4 @@ export default function PublicNavbar() {
         </AnimatePresence>
       </div>
     </motion.header>
-  );
-}
+  )}

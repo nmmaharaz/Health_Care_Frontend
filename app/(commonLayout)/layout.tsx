@@ -1,4 +1,4 @@
-import PublicNavbar from "@/components/mvpblocks/PublicNavbar";
+import PublicNavbar from "@/components/shared/PublicNavbar";
 import Footer from "@/components/shared/Footer";
 import React from "react";
 
