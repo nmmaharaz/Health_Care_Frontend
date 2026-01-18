@@ -9,9 +9,9 @@ export default function Home() {
     <div>
       <Hero></Hero>
       <Features></Features>
-      <Services />
+      {/* <Services />
       <WhyChooseUs></WhyChooseUs>
-      <HowWeWork></HowWeWork>
+      <HowWeWork></HowWeWork> */}
     </div>  
   );
 }
