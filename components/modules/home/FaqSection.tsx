@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, PhoneCall, Stethoscope } from 'lucide-react';
+import { ChevronDown, ChevronUp, PhoneCall } from 'lucide-react';
 
 interface FaqItem {
     question: string;
@@ -80,7 +80,7 @@ const FaqSection = () => {
                                     onClick={() => toggleFaq(index)}
                                     className="w-full py-6 flex justify-between items-center text-left transition-all group"
                                 >
-                                    <span className={`text-xl font-bold ${openIndex === index ? 'text-[#4d5edb]' : 'text-[#0a1d37]'} group-hover:text-[#4d5edb]`}>
+                                    <span className={`text-xl font-semibold ${openIndex === index ? 'text-[#4d5edb]' : 'text-[#0a1d37]'} group-hover:text-[#4d5edb]`}>
                                         {item.question}
                                     </span>
                                     {openIndex === index ? (
