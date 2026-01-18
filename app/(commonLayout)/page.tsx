@@ -11,7 +11,7 @@ export default function Home() {
       <Features></Features>
       <Services />
       <WhyChooseUs></WhyChooseUs>
-      {/* <HowWeWork></HowWeWork> */}
+      <HowWeWork></HowWeWork>
     </div>  
   );
 }
