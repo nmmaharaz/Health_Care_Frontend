@@ -1,63 +1,61 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { loginUser } from '@/service/auth/loginUser';
 import { Headset, Clock } from 'lucide-react';
-import { useActionState, useState } from 'react';
+import { useState } from 'react';
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [success, setSuccess] = useState(true);
-  const [state, formAction, isPending] = useActionState(loginUser, null)
-
-   const getFieldError = (fieldName: string) => {
-    if (state && state.errors) {
-      const error = state.errors.find((err: any) => err.field === fieldName);
-      if (error) {
-        return error.message;
-      } else {
-        return null;
-      }
-    } else {
-      return null;
-    }
-  };
-  console.log(state, "state");
-  console.log(getFieldError, "email");
   return (
     <section className="max-w-7xl mx-auto py-10 px-6">
-      <div className="bg-white rounded-[40px] drop-shadow-sm p-8 md:p-16 flex flex-col lg:flex-row gap-16">
-        
+      <div className="bg-white rounded-[40px] drop-shadow-sm p-8 md:p-14 flex flex-col lg:flex-row gap-16">
+
         {/* Left Side: Booking Form */}
         <div className="lg:w-3/5">
-          <form action={formAction} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input 
-              type="email" 
-              name='email'
-              placeholder="Email Address" 
+          <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              type="text"
+              placeholder="First Name"
+              className="bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              className="bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
+            />
+            <input
+              type="email"
+              placeholder="Email Address"
               className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
             />
-            <input 
-              type="password" 
-              name='password'
-              placeholder="Password" 
+            <input
+              type="tel"
+              placeholder="Phone Number"
               className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
             />
-            <input 
-              type="password"
-              name='confirmPassword' 
-              placeholder="Confirm Password" 
-              className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
+            <input
+              type="date"
+              className="bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all text-gray-500"
             />
-            
+            <select className="bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all text-gray-500">
+              <option>—Please choose an option—</option>
+              <option>General Consultation</option>
+              <option>Cardiology</option>
+              <option>Diagnostics</option>
+            </select>
+
             <div className="md:col-span-2 mt-4">
-               <button type='submit' className="bg-linear-to-r from-[#4338ca] to-[#4f6ad4f1] text-white font-bold py-4 px-10 rounded-full hover:bg-[#3b4bbd] transition-colors shadow-lg">
-                Login An Account
+              <button className="bg-linear-to-r from-[#4338ca] to-[#4f6ad4f1] text-white font-bold py-4 px-10 rounded-full hover:bg-[#3b4bbd] transition-colors shadow-lg">
+                Book An Appointment
               </button>
             </div>
 
             {/* Success Message Placeholder */}
-            <div className="md:col-span-2 mt-4 p-4 border border-green-500 rounded-full text-green-600 text-sm font-medium">
-              Thank you for your message. It has been sent.
-            </div>
+            {
+              success && (
+                <div className="md:col-span-2 mt-4 p-4 border border-green-500 rounded-full text-green-600 text-sm font-medium">
+                  Thank you for your message. It has been sent.
+                </div>
+              )
+            }
           </form>
         </div>
 
@@ -100,4 +98,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

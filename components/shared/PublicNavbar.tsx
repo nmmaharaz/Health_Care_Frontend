@@ -146,16 +146,16 @@ export default function PublicNavbar() {
               href="/login"
               className="text-foreground font-medium transition-colors duration-200 hover:text-rose-500"
             >
-              Sign In
+            Login
             </Link>
             {/* <ShinyButton>Login</ShinyButton> */}
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 prefetch={false}
-                href="/signup"
+                href="/register"
               >
                 <button className={`${styles.btn} ${styles.primary}`}>
-                  Sign Up
+                  Register
                 </button>
               </Link>
             </motion.div>
