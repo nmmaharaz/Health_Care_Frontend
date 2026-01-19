@@ -6,6 +6,7 @@ import { Menu, X, ChevronDown, ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { navItems } from '@/app/constant/NavbarItem';
+import styles from '../modules/home/Hero.module.css';
 // import { ShinyButton } from '../ui/shiny-button';
 
 
@@ -73,10 +74,10 @@ export default function PublicNavbar() {
               href="/"
               className="flex items-center space-x-2"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-rose-500 to-rose-700">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br bg-[#4338ca], bg-[#4f6ad4f1]">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
-              <span className="bg-linear-to-r from-rose-500 to-rose-700 bg-clip-text text-xl font-bold text-transparent">
+              <span className="to right, bg-[#4338ca], bg-[#4f6ad4f1] bg-clip-text text-xl font-bold text-transparent">
                 Acme Inc.
               </span>
             </Link>
@@ -152,10 +153,10 @@ export default function PublicNavbar() {
               <Link
                 prefetch={false}
                 href="/signup"
-                className="inline-flex items-center space-x-2 rounded-full bg-linear-to-r from-rose-500 to-rose-700 px-6 py-2.5 font-medium text-white transition-all duration-200 hover:shadow-lg"
               >
-                <span>Get Started</span>
-                <ArrowRight className="h-4 w-4" />
+                <button className={`${styles.btn} ${styles.primary}`}>
+                  Sign Up
+                </button>
               </Link>
             </motion.div>
           </div>
@@ -175,50 +176,51 @@ export default function PublicNavbar() {
 
         <AnimatePresence>
           {isMobileMenuOpen && (
-           <div className='relative'>
-             <motion.div
-              className="overflow-hidden absolute pl-20 md:pl-40 w-full lg:hidden"
-              variants={mobileMenuVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-            >
-              <div className="border-border bg-background/95 mt-4 space-y-2 rounded-xl border py-4 backdrop-blur-lg">
-                {navItems.map((item) => (
-                  <Link
-                    prefetch={false}
-                    key={item.name}
-                    href={item.href}
-                    className="text-foreground hover:bg-muted block px-4 py-3 font-medium transition-colors duration-200"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-                <div className="space-y-2 px-4 py-2">
-                  <Link
-                    prefetch={false}
-                    href="/login"
-                    className="text-foreground hover:bg-muted block w-full rounded-lg py-2.5 text-center font-medium transition-colors duration-200"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    prefetch={false}
-                    href="/signup"
-                    className="block w-full rounded-lg bg-linear-to-r from-rose-500 to-rose-700 py-2.5 text-center font-medium text-white transition-all duration-200 hover:shadow-lg"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Get Started
-                  </Link>
+            <div className='relative'>
+              <motion.div
+                className="overflow-hidden absolute pl-20 md:pl-40 w-full lg:hidden"
+                variants={mobileMenuVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+              >
+                <div className="border-border bg-background/95 mt-4 space-y-2 rounded-xl border py-4 backdrop-blur-lg">
+                  {navItems.map((item) => (
+                    <Link
+                      prefetch={false}
+                      key={item.name}
+                      href={item.href}
+                      className="text-foreground hover:bg-muted block px-4 py-3 font-medium transition-colors duration-200"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                  <div className="space-y-2 px-4 py-2">
+                    <Link
+                      prefetch={false}
+                      href="/login"
+                      className="text-foreground hover:bg-muted block w-full rounded-lg py-2.5 text-center font-medium transition-colors duration-200"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      prefetch={false}
+                      href="/signup"
+                      className="block w-full rounded-lg bg-linear-to-r from-rose-500 to-rose-700 py-2.5 text-center font-medium text-white transition-all duration-200 hover:shadow-lg"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Get Started
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-           </div>
+              </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </div>
     </motion.header>
-  )}
+  )
+}
