@@ -8,6 +8,7 @@ import envVars from "@/config/env";
 import { NextResponse } from "next/server";
 import { getDefaultDashboardRoute, isValidRedirectForRole } from "@/utils/auth-utils";
 import { redirect } from "next/navigation";
+import { setCookie } from "@/utils/tokenHandlers";
 
 const loginValidationZodSchema = z.object({
     email: z.email({
@@ -86,9 +87,8 @@ export const loginUser = async (_currentState: any, formData: any) => {
             throw new Error("Tokens not found in cookies");
         }
 
-        const cookieStore = await cookies()
 
-        cookieStore.set("accessToken", accessTokenObj.accessToken, {
+        setCookie("accessToken", accessTokenObj.accessToken, {
             httpOnly: true,
             secure: true,
             sameSite: accessTokenObj['SameSite'] || 'none',
@@ -96,11 +96,11 @@ export const loginUser = async (_currentState: any, formData: any) => {
             path: accessTokenObj['Path'] || '/',
         })
 
-        cookieStore.set("refreshToken", refreshTokenObj.refreshToken, {
+        setCookie("refreshToken", refreshTokenObj.refreshToken, {
             httpOnly: true,
             secure: true,
             sameSite: refreshTokenObj['SameSite'] || 'none',
-            maxAge: refreshTokenObj['Max-Age'] ? parseInt(refreshTokenObj['Max-Age']) : 1000 * 60 * 60,
+            maxAge: refreshTokenObj['Max-Age'] ? parseInt(refreshTokenObj['Max-Age']) : 1000 * 60 * 60 * 24 * 30,
             path: refreshTokenObj['Path'] || '/',
         })
 
@@ -110,7 +110,6 @@ export const loginUser = async (_currentState: any, formData: any) => {
             throw new Error("Invalid token");
         }
 
-        // NextResponse
         if (redirectTo) {
             const redirectPath = redirectTo.toString();
             if (isValidRedirectForRole(redirectPath, verifiedToken.role)) {
