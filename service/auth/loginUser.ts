@@ -5,6 +5,7 @@ import { parse } from "cookie";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import envVars from "@/config/env";
+import { NextResponse } from "next/server";
 
 const loginValidationZodSchema = z.object({
     email: z.email({
@@ -107,6 +108,8 @@ export const loginUser = async (_currentState: any, formData: any) => {
         if (typeof verifiedToken === "string") {
             throw new Error("Invalid token");
         }
+
+        // NextResponse
 
         return res.json()
     } catch (error) {

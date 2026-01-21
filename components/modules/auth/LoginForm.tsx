@@ -11,28 +11,15 @@ const LoginForm = () => {
   const getFieldError = (fieldName: string) => {
     if (state && state.errors) {
       const error = state.errors.find((err: any) => err.field === fieldName);
-    if (error) {
-      return error.message;
+      if (error) {
+        return error.message;
+      } else {
+        return null;
+      }
     } else {
       return null;
     }
-  } else {
-    return null;
-  }
   };
-  console.log(getFieldError, "getFieldError");
-  //  const getFieldError = (fieldName: string) => {
-  //   if (state && state.errors) {
-  //     const error = state.errors.find((err: any) => err.field === fieldName);
-  //     if (error) {
-  //       return error.message;
-  //     } else {
-  //       return null;
-  //     }
-  //   } else {
-  //     return null;
-  //   }
-  // };
 
   console.log(state, "state");
   // console.log(getFieldError, "email");
