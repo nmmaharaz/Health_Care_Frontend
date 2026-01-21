@@ -64,12 +64,10 @@ export const loginUser = async (_currentState: any, formData: any) => {
         })
 
         const setCookieHeaders = res.headers.getSetCookie()
-        // console.log("Set-Cookie Headers:", setCookieHeaders)
         if (setCookieHeaders && setCookieHeaders.length > 0) {
             setCookieHeaders.forEach((cookie) => {
                 const parsedCookie = parse(cookie);
                 if (parsedCookie['accessToken']) {
-                    console.log("Parsed Access Token Cookie:", parsedCookie)
                     accessTokenObj = parsedCookie
                 }
                 if (parsedCookie['refreshToken']) {

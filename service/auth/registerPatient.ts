@@ -47,6 +47,7 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
         });
         
         const result = await res.json();
+        console.log("Registration Result:", result);
 
         if(result.success) {
             await loginUser(_currentState, formData)
@@ -54,10 +55,10 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
         return result;
 
     } catch (error: any) {
-        console.error("Fetch Error:", error);
-         if (error?.digest?.startsWith('NEXT_REDIRECT')) {
+        if (error?.digest?.startsWith('NEXT_REDIRECT')) {
             throw error;
         }
+        console.error("Fetch Error:", error);
         return { success: false, message: "Registration failed" };
     }
 }
