@@ -23,7 +23,6 @@ const registerPatientValidationZodSchema = z.object({
 
 export const regiterPatient = async (_currentState: any, formData: any) => {
     try {
-        // 1. Image/File collect korun (Jodi thake)
         const file = formData.get("file");
 
         const registerData = {
@@ -35,20 +34,15 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
             }
         };
 
-        // 2. Notun FormData create korun
         const form = new FormData();
         form.append("data", JSON.stringify(registerData));
         
-        // Oboshshoi file thakle append korte hobe, nahole multer error dite pare
         if (file) {
             form.append("file", file);
         }
 
-        // 3. API Call
         const res = await fetch("http://localhost:5000/api/v1/user/create-patient", {
             method: "POST",
-            // Note: Server action-e Content-Type set korben na, 
-            // fetch automatic boundary set korbe
             body: form, 
         });
         
