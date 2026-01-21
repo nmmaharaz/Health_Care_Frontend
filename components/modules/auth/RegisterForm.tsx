@@ -1,47 +1,49 @@
 "use client";
+import { regiterPatient } from '@/service/auth/registerPatient';
 import { Headset, Clock } from 'lucide-react';
-import { useState } from 'react';
+import { useActionState, useState } from 'react';
 
 const RegisterForm = () => {
   const [success, setSuccess] = useState(true);
+  const [state, formAction, isPending] = useActionState(regiterPatient, null)
+  console.log(state, "state");
   return (
     <section className="max-w-7xl mx-auto py-10 px-6">
       <div className="bg-white rounded-[40px] drop-shadow-sm p-8 md:p-14 flex flex-col lg:flex-row gap-16">
 
         {/* Left Side: Booking Form */}
         <div className="lg:w-3/5">
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form action={formAction} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input
               type="text"
-              placeholder="First Name"
-              className="bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
-            />
-            <input
-              type="text"
-              placeholder="Last Name"
-              className="bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
+              placeholder="Name"
+              name='name'
+              className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
             />
             <input
               type="email"
               placeholder="Email Address"
+              name='email'
               className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
             />
             <input
-              type="tel"
-              placeholder="Phone Number"
-              className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
+              type="password"
+              placeholder="Password"
+              name='password'
+              className="bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
             />
             <input
-              type="date"
-              className="bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all text-gray-500"
+              type="password"
+              name='confirmPassword'
+              placeholder="Confirm Password"
+              className="bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
             />
-            <select className="bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all text-gray-500">
-              <option>—Please choose an option—</option>
-              <option>General Consultation</option>
-              <option>Cardiology</option>
-              <option>Diagnostics</option>
-            </select>
 
+            <textarea
+              name='address'
+              placeholder="Address"
+              className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
+            />
             <div className="md:col-span-2 mt-4">
               <button className="bg-linear-to-r from-[#4338ca] to-[#4f6ad4f1] text-white font-bold py-4 px-10 rounded-full hover:bg-[#3b4bbd] transition-colors shadow-lg">
                 Book An Appointment
