@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
 import z from "zod"
+import { loginUser } from "./loginUser";
 
 const registerPatientValidationZodSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
@@ -50,12 +51,16 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
             // fetch automatic boundary set korbe
             body: form, 
         });
-
+        
         const result = await res.json();
+
         return result;
 
-    } catch (error) {
+    } catch (error: any) {
         console.error("Fetch Error:", error);
+         if (error?.digest?.startsWith('NEXT_REDIRECT')) {
+            throw error;
+        }
         return { success: false, message: "Registration failed" };
     }
 }

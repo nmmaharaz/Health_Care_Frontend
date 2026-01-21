@@ -6,6 +6,8 @@ import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import envVars from "@/config/env";
 import { NextResponse } from "next/server";
+import { getDefaultDashboardRoute, isValidRedirectForRole } from "@/utils/auth-utils";
+import { redirect } from "next/navigation";
 
 const loginValidationZodSchema = z.object({
     email: z.email({
@@ -26,6 +28,7 @@ const loginValidationZodSchema = z.object({
 
 export const loginUser = async (_currentState: any, formData: any) => {
     try {
+        const redirectTo = formData.get('redirect') || null;
         let accessTokenObj: null | any = null
         let refreshTokenObj: null | any = null
         const validationData = {
@@ -110,9 +113,22 @@ export const loginUser = async (_currentState: any, formData: any) => {
         }
 
         // NextResponse
+        if (redirectTo) {
+            const redirectPath = redirectTo.toString();
+            if (isValidRedirectForRole(redirectPath, verifiedToken.role)) {
+                redirect(redirectPath);
+            } else {
+                redirect(getDefaultDashboardRoute(verifiedToken.role));
+            }
+        }else{
+            redirect(getDefaultDashboardRoute(verifiedToken.role));
+        }
 
         return res.json()
-    } catch (error) {
+    } catch (error: any) {
+        if (error?.digest?.startsWith('NEXT_REDIRECT')) {
+            throw error;
+        }
         console.log("Login error: ", error);
         return { error: "Login failed" };
     }

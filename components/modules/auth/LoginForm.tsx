@@ -4,9 +4,11 @@ import { loginUser } from '@/service/auth/loginUser';
 import { Headset, Clock } from 'lucide-react';
 import { useActionState, useState } from 'react';
 
-const LoginForm = () => {
+const LoginForm = ({ redirect }: { redirect?: string }) => {
   const [success, setSuccess] = useState(true);
   const [state, formAction, isPending] = useActionState(loginUser, null)
+
+  console.log(state, "state");
 
   const getFieldError = (fieldName: string) => {
     if (state && state.errors) {
@@ -30,6 +32,9 @@ const LoginForm = () => {
         {/* Left Side: Booking Form */}
         <div className="lg:w-3/5">
           <form action={formAction} className="grid grid-cols-1 md:grid-cols-2 gap-1">
+            {redirect && (
+              <input type="hidden" name="redirect" value={redirect} />
+            )}
             <input
               type="email"
               name='email'
