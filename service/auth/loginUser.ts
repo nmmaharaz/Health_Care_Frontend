@@ -78,7 +78,6 @@ export const loginUser = async (_currentState: any, formData: any) => {
             throw new Error("Tokens not found in cookies");
         }
 
-
         setCookie("accessToken", accessTokenObj.accessToken, {
             httpOnly: true,
             secure: true,

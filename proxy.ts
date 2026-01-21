@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken"
 import envVars from "./config/env";
 import { getDefaultDashboardRoute, getRouteOwner, isAuthRoute, UserRole } from "./utils/auth-utils";
-import { deleteCookie, verifyTokenFromCookie } from "./utils/tokenHandlers";
+import { deleteCookie, getCookie, verifyTokenFromCookie } from "./utils/tokenHandlers";
 
 
 export const proxy = async (req: NextRequest) => {
     const pathname = req.nextUrl.pathname;
 
-    const accessToken = req.cookies.get("accessToken")?.value || null
+    const accessToken = await getCookie("accessToken") || null
 
     let userRole: UserRole | null = null
 
@@ -33,10 +33,10 @@ export const proxy = async (req: NextRequest) => {
     if (routerOwner === null) {
         return NextResponse.next();
     }
-    
+
     if (!accessToken) {
         const loginUrl = new URL("/login", req.url);
-        loginUrl.searchParams.set("redirect", pathname);    
+        loginUrl.searchParams.set("redirect", pathname);
         return NextResponse.redirect(loginUrl);
     }
 
