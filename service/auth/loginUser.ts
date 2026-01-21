@@ -8,7 +8,7 @@ import envVars from "@/config/env";
 import { NextResponse } from "next/server";
 import { getDefaultDashboardRoute, isValidRedirectForRole } from "@/utils/auth-utils";
 import { redirect } from "next/navigation";
-import { setCookie } from "@/utils/tokenHandlers";
+import { setCookie, verifyTokenFromCookie } from "@/utils/tokenHandlers";
 
 const loginValidationZodSchema = z.object({
     email: z.email({
@@ -104,7 +104,7 @@ export const loginUser = async (_currentState: any, formData: any) => {
             path: refreshTokenObj['Path'] || '/',
         })
 
-        const verifiedToken: jwt.JwtPayload | string = jwt.verify(accessTokenObj.accessToken, envVars.jwt.jwt_access_secret)
+        const verifiedToken: jwt.JwtPayload | string = verifyTokenFromCookie(accessTokenObj.accessToken, envVars.jwt.jwt_access_secret)
 
         if (typeof verifiedToken === "string") {
             throw new Error("Invalid token");
@@ -117,7 +117,7 @@ export const loginUser = async (_currentState: any, formData: any) => {
             } else {
                 redirect(getDefaultDashboardRoute(verifiedToken.role));
             }
-        }else{
+        } else {
             redirect(getDefaultDashboardRoute(verifiedToken.role));
         }
 
