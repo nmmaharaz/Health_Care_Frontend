@@ -2,6 +2,7 @@
 "use server"
 import z from "zod"
 import { loginUser } from "./loginUser";
+import { formValidationError } from "@/error/formValidationError";
 
 const registerPatientValidationZodSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
@@ -25,6 +26,20 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
     try {
         const file = formData.get("file");
 
+        const verifyFormData = {
+            name: formData.get("name"),
+            email: formData.get('email'),
+            password: formData.get('password'),
+            confirmPassword: formData.get('confirmPassword'),
+            address: formData.get("address")
+        };
+
+        const validatedFields = registerPatientValidationZodSchema.safeParse(verifyFormData);
+
+        if (!validatedFields.success) {
+            return formValidationError(validatedFields);
+        }
+
         const registerData = {
             password: formData.get('password'),
             patient: {
@@ -36,20 +51,20 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
 
         const form = new FormData();
         form.append("data", JSON.stringify(registerData));
-        
+
         if (file) {
             form.append("file", file);
         }
 
         const res = await fetch("http://localhost:5000/api/v1/user/create-patient", {
             method: "POST",
-            body: form, 
+            body: form,
         });
-        
+
         const result = await res.json();
         console.log("Registration Result:", result);
 
-        if(result.success) {
+        if (result.success) {
             await loginUser(_currentState, formData)
         }
         return result;

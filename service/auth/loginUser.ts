@@ -2,13 +2,12 @@
 "use server"
 import z from "zod"
 import { parse } from "cookie";
-import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import envVars from "@/config/env";
-import { NextResponse } from "next/server";
 import { getDefaultDashboardRoute, isValidRedirectForRole } from "@/utils/auth-utils";
 import { redirect } from "next/navigation";
 import { setCookie, verifyTokenFromCookie } from "@/utils/tokenHandlers";
+import { formValidationError } from "@/error/formValidationError";
 
 const loginValidationZodSchema = z.object({
     email: z.email({
@@ -39,16 +38,8 @@ export const loginUser = async (_currentState: any, formData: any) => {
         }
         const validatedFields = loginValidationZodSchema.safeParse(validationData);
 
-        if (!validatedFields.success) {
-            return {
-                seccess: false,
-                errors: validatedFields.error.issues.map(issue => {
-                    return {
-                        field: issue.path[0],
-                        message: issue.message,
-                    }
-                })
-            }
+        if(!validatedFields.success) {
+           return formValidationError(validatedFields);
         }
 
         const loginData = {
