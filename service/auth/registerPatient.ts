@@ -54,6 +54,9 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
         
         const result = await res.json();
 
+        if(result.success) {
+            await loginUser(_currentState, formData)
+        }
         return result;
 
     } catch (error: any) {
