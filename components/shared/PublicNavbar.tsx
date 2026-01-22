@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, ArrowRight, Sparkles } from 'lucide-react';
+import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { navItems } from '@/app/constant/NavbarItem';
 import styles from '../modules/home/Hero.module.css';
-// import { ShinyButton } from '../ui/shiny-button';
 
 
 export default function PublicNavbar() {
@@ -15,6 +14,7 @@ export default function PublicNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { theme } = useTheme();
+  const accessToken = true
 
   useEffect(() => {
     const handleScroll = () => {
@@ -140,16 +140,8 @@ export default function PublicNavbar() {
             ))}
           </nav>
 
-          <div className="hidden items-center space-x-4 lg:flex">
-            <Link
-              prefetch={false}
-              href="/login"
-              className="text-foreground font-medium transition-colors duration-200 hover:text-rose-500"
-            >
-            Login
-            </Link>
-            {/* <ShinyButton>Login</ShinyButton> */}
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+         {accessToken ?
+            (<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 prefetch={false}
                 href="/register"
@@ -158,9 +150,27 @@ export default function PublicNavbar() {
                   Register
                 </button>
               </Link>
-            </motion.div>
-          </div>
+            </motion.div>) :
+            (<div className="hidden items-center space-x-4 lg:flex">
+              <Link
+                prefetch={false}
+                href="/login"
+                className="text-foreground font-medium transition-colors duration-200 hover:text-rose-500"
+              >
+                Login
+              </Link>
 
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  prefetch={false}
+                  href="/logout"
+                >
+                  <button className={`${styles.btn} ${styles.primary}`}>
+                    Logout
+                  </button>
+                </Link>
+              </motion.div>
+            </div>)}
           <motion.button
             className="hover:bg-muted rounded-lg p-2 transition-colors duration-200 lg:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

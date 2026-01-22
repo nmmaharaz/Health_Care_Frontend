@@ -1,0 +1,24 @@
+.circle::before,
+.circle::after {
+  content: "";
+  position: absolute;
+  /* filter: blur(px); */
+  border-radius: 50%;
+}
+
+.circle::before {
+  width: 420px;
+  height: 420px;
+  bottom: -240px;
+  right: -140px;
+  background-image: linear-gradient(to bottom, #F3F3FF 10%, #DEDDFD 90%);
+}
+
+.circle::after {
+  background-image: linear-gradient(to bottom, #DEDDFD 10%, #F3F3FF 90%);
+  width: 420px;
+  height: 420px;
+  bottom: -280px;
+  left: -160px;
+  z-index: 0;
+}

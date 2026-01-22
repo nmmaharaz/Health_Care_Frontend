@@ -1,12 +1,12 @@
-import styles from "@/components/modules/home/Hero.module.css";
-
+import cssStyle from './SharedHeader.module.css';
+import styles from "../modules/home/Hero.module.css";
 
 const SharedHeader = ({ title, subtitle }: {
   title: string;
   subtitle?: string;
 }) => {
   return (
-    <section className="relative mt-3 mx-7.5 py-8 md:py-12 lg:py-22 bg-[#f4f6ff] overflow-hidden rounded-[40px]">
+    <section className={`${cssStyle.circle} relative mt-3 mx-7.5 py-8 md:py-12 lg:py-22 bg-[#f4f6ff] overflow-hidden rounded-[40px]`}>
 
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#7367f0] opacity-5 rounded-tr-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-[#7367f0] opacity-10 rounded-tl-full blur-2xl"></div>
