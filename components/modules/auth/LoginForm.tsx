@@ -1,34 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import InputFieldError from '@/error/InputFieldError';
 import { loginUser } from '@/service/auth/loginUser';
 import { Headset, Clock } from 'lucide-react';
 import { useActionState } from 'react';
 
 const LoginForm = ({ redirect }: { redirect?: string }) => {
-  // const [success, setSuccess] = useState(true);
   const [state, formAction, isPending] = useActionState(loginUser, null)
-  console.log(state, "this is state")
+  console.log(state)
 
-  const getFieldError = (fieldName: string) => {
-    if (state && state.errors) {
-      const error = state.errors.find((err: any) => err.field === fieldName);
-      if (error) {
-        return error.message;
-      } else {
-        return null;
-      }
-    } else {
-      return null;
-    }
-  };
-
-  console.log(state, "state");
-  // console.log(getFieldError, "email");
   return (
     <section className="max-w-7xl mx-auto py-10 px-6">
       <div className="bg-white rounded-[40px] drop-shadow-sm p-8 md:p-16 flex flex-col lg:flex-row gap-16">
 
-        {/* Left Side: Booking Form */}
         <div className="lg:w-3/5">
           <form action={formAction} className="grid grid-cols-1 md:grid-cols-2 gap-1">
             {redirect && (
@@ -41,11 +24,7 @@ const LoginForm = ({ redirect }: { redirect?: string }) => {
               placeholder="Email Address"
               className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
             />
-            {/* {getFieldError("email") && (
-              <label className="text-red-600">
-                {getFieldError("email")}
-              </label>
-            )} */}
+            <InputFieldError state={state} field="email"></InputFieldError>
             <input
               type="password"
               name='password'
@@ -53,11 +32,7 @@ const LoginForm = ({ redirect }: { redirect?: string }) => {
               placeholder="Password"
               className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] mt-4 transition-all"
             />
-            {/* {getFieldError("password") && (
-              <label className="text-red-600">
-                {getFieldError("password")}
-              </label>
-            )} */}
+            <InputFieldError state={state} field="password"></InputFieldError>
             <input
               type="password"
               required
@@ -65,11 +40,7 @@ const LoginForm = ({ redirect }: { redirect?: string }) => {
               placeholder="Confirm Password"
               className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] mt-4 transition-all"
             />
-            {/* {getFieldError("confirmPassword") && (
-              <label className="text-red-600">
-                {getFieldError("confirmPassword")}
-              </label>
-            )} */}
+            <InputFieldError state={state} field="confirmPassword"></InputFieldError>
             <div className="md:col-span-2 mt-4">
               <button type='submit' className="bg-linear-to-r from-[#4338ca] to-[#4f6ad4f1] text-white font-bold py-4 px-10 rounded-full hover:bg-[#3b4bbd] transition-colors shadow-lg">
                 {isPending ? "Logging in..." : "Login An Account"}

@@ -7,17 +7,17 @@ import jwt from "jsonwebtoken"
 export const setCookie = async (cookieName: string, cookieValue: string, options: Partial<ResponseCookie>) => {
     const cookieStore = await cookies()
     cookieStore.set(cookieName, cookieValue, options);
-}           
+}
 export const getCookie = async (cookieName: string) => {
     const cookieStore = await cookies()
     return cookieStore.get(cookieName)?.value || null;
-}     
+}
 
 export const deleteCookie = async (cookieName: string) => {
     const cookieStore = await cookies()
     cookieStore.delete(cookieName);
-} 
+}
 
-export const verifyTokenFromCookie = async (cookieName: string, cookieSecret: string) => {
+export const verifyTokenFromCookie = (cookieName: string, cookieSecret: string) => {
     return jwt.verify(cookieName, cookieSecret)
 }

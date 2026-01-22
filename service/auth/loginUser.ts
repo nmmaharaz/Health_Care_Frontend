@@ -23,7 +23,7 @@ export const loginUser = async (_currentState: any, formData: any) => {
         }
 
         if (zodValidate(validationData, loginValidationZodSchema).success === false) {
-            return zodValidate(loginValidationZodSchema, loginValidationZodSchema);
+            return zodValidate(validationData, loginValidationZodSchema);
         }
 
         const loginData = {
@@ -37,8 +37,6 @@ export const loginUser = async (_currentState: any, formData: any) => {
                 "Content-Type": "application/json",
             }
         })
-
-        console.log(res.json(), "Hellow")
 
         const setCookieHeaders = res.headers.getSetCookie()
         if (setCookieHeaders && setCookieHeaders.length > 0) {

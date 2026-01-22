@@ -12,9 +12,10 @@ export const proxy = async (req: NextRequest) => {
 
     let userRole: UserRole | null = null
 
+
     if (accessToken) {
         const verifiedToken: string | jwt.JwtPayload = verifyTokenFromCookie(accessToken, envVars.jwt.jwt_access_secret)
-
+       
         if (typeof verifiedToken === "string") {
             deleteCookie("accessToken");
             deleteCookie("refreshToken");
@@ -22,6 +23,8 @@ export const proxy = async (req: NextRequest) => {
         }
         userRole = verifiedToken.role
     }
+
+    // console.log(userRole, "accessToken")
 
     const routerOwner = getRouteOwner(pathname);
     const isAuth = isAuthRoute(pathname)
