@@ -3,6 +3,7 @@
 import z from "zod"
 import { loginUser } from "./loginUser";
 import { formValidationError } from "@/error/formValidationError";
+import { serverFetch } from "@/utils/server-fetch";
 
 const registerPatientValidationZodSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
@@ -56,8 +57,7 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
             form.append("file", file);
         }
 
-        const res = await fetch("http://localhost:5000/api/v1/user/create-patient", {
-            method: "POST",
+        const res = await serverFetch.post("/user/create-patient", {
             body: form,
         });
 
