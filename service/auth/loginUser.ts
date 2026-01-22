@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
-import z from "zod"
 import { parse } from "cookie";
 import jwt from "jsonwebtoken";
 import envVars from "@/config/env";
@@ -9,23 +8,7 @@ import { redirect } from "next/navigation";
 import { setCookie, verifyTokenFromCookie } from "@/utils/tokenHandlers";
 import { formValidationError } from "@/error/formValidationError";
 import { serverFetch } from "@/utils/server-fetch";
-
-const loginValidationZodSchema = z.object({
-    email: z.email({
-        message: "Email is required",
-    }),
-    // email: z.string().min(50, {message: "Email is required"}),
-    password: z.string("Password is required").min(6, {
-        error: "Password is required and must be at least 6 characters long",
-    }).max(100, {
-        error: "Password must be at most 100 characters long",
-    }),
-    confirmPassword: z.string("Password is required")
-}).refine((data) => data.password === data.confirmPassword, {
-    error: "Passwords do not match",
-    path: ["confirmPassword"]
-});
-
+import { loginValidationZodSchema } from "@/validation/zod/auth.validation";
 
 export const loginUser = async (_currentState: any, formData: any) => {
     try {
