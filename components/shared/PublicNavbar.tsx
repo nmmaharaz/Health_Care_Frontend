@@ -14,7 +14,7 @@ export default function PublicNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { theme } = useTheme();
-  const accessToken = true
+  const accessToken = false
 
   useEffect(() => {
     const handleScroll = () => {
@@ -140,14 +140,14 @@ export default function PublicNavbar() {
             ))}
           </nav>
 
-         {accessToken ?
+          {accessToken ?
             (<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 prefetch={false}
-                href="/register"
+                href="/logout"
               >
                 <button className={`${styles.btn} ${styles.primary}`}>
-                  Register
+                  Logout
                 </button>
               </Link>
             </motion.div>) :
@@ -163,10 +163,10 @@ export default function PublicNavbar() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   prefetch={false}
-                  href="/logout"
+                  href="/register"
                 >
                   <button className={`${styles.btn} ${styles.primary}`}>
-                    Logout
+                    Register
                   </button>
                 </Link>
               </motion.div>

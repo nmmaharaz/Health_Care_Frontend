@@ -1,3 +1,4 @@
+// "use server"
 import LoginForm from "@/components/modules/auth/LoginForm";
 import SharedHeader from "@/components/shared/SharedHeader";
 

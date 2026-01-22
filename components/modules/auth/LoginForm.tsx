@@ -2,13 +2,12 @@
 "use client";
 import { loginUser } from '@/service/auth/loginUser';
 import { Headset, Clock } from 'lucide-react';
-import { useActionState, useState } from 'react';
+import { useActionState } from 'react';
 
 const LoginForm = ({ redirect }: { redirect?: string }) => {
-  const [success, setSuccess] = useState(true);
+  // const [success, setSuccess] = useState(true);
   const [state, formAction, isPending] = useActionState(loginUser, null)
-
-  console.log(state, "state");
+  console.log(state, "this is state")
 
   const getFieldError = (fieldName: string) => {
     if (state && state.errors) {
@@ -42,11 +41,11 @@ const LoginForm = ({ redirect }: { redirect?: string }) => {
               placeholder="Email Address"
               className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] transition-all"
             />
-            {getFieldError("email") && (
+            {/* {getFieldError("email") && (
               <label className="text-red-600">
                 {getFieldError("email")}
               </label>
-            )}
+            )} */}
             <input
               type="password"
               name='password'
@@ -54,11 +53,11 @@ const LoginForm = ({ redirect }: { redirect?: string }) => {
               placeholder="Password"
               className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] mt-4 transition-all"
             />
-            {getFieldError("password") && (
+            {/* {getFieldError("password") && (
               <label className="text-red-600">
                 {getFieldError("password")}
               </label>
-            )}
+            )} */}
             <input
               type="password"
               required
@@ -66,11 +65,11 @@ const LoginForm = ({ redirect }: { redirect?: string }) => {
               placeholder="Confirm Password"
               className="md:col-span-2 bg-[#f5f6ff] p-4 rounded-xl outline-none border border-transparent focus:border-[#4d5edb] mt-4 transition-all"
             />
-            {getFieldError("confirmPassword") && (
+            {/* {getFieldError("confirmPassword") && (
               <label className="text-red-600">
                 {getFieldError("confirmPassword")}
               </label>
-            )}
+            )} */}
             <div className="md:col-span-2 mt-4">
               <button type='submit' className="bg-linear-to-r from-[#4338ca] to-[#4f6ad4f1] text-white font-bold py-4 px-10 rounded-full hover:bg-[#3b4bbd] transition-colors shadow-lg">
                 {isPending ? "Logging in..." : "Login An Account"}

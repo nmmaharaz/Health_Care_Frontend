@@ -6,12 +6,13 @@ import envVars from "@/config/env";
 import { getDefaultDashboardRoute, isValidRedirectForRole } from "@/utils/auth-utils";
 import { redirect } from "next/navigation";
 import { setCookie, verifyTokenFromCookie } from "@/utils/tokenHandlers";
-import { zodValidate } from "@/error/formValidationError";
 import { serverFetch } from "@/utils/server-fetch";
+import { zodValidate } from "@/error/zodValidate";
 import { loginValidationZodSchema } from "@/validation/zod/auth.validation";
 
 export const loginUser = async (_currentState: any, formData: any) => {
     try {
+        console.log("Hellow mana")
         const redirectTo = formData.get('redirect') || null;
         let accessTokenObj: null | any = null
         let refreshTokenObj: null | any = null
@@ -21,8 +22,8 @@ export const loginUser = async (_currentState: any, formData: any) => {
             confirmPassword: formData.get('confirmPassword')
         }
 
-        if (zodValidate(loginValidationZodSchema, validationData).seccess === false) {
-            return zodValidate(loginValidationZodSchema, validationData)
+        if (zodValidate(validationData, loginValidationZodSchema).success === false) {
+            return zodValidate(loginValidationZodSchema, loginValidationZodSchema);
         }
 
         const loginData = {
@@ -33,9 +34,11 @@ export const loginUser = async (_currentState: any, formData: any) => {
         const res = await serverFetch.post("/auth/login", {
             body: JSON.stringify(loginData),
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             }
         })
+
+        console.log(res.json(), "Hellow")
 
         const setCookieHeaders = res.headers.getSetCookie()
         if (setCookieHeaders && setCookieHeaders.length > 0) {

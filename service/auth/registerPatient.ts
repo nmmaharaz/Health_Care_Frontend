@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
-import { zodValidate } from "@/error/formValidationError";
+import { zodValidate } from "@/error/zodValidate";
 import { loginUser } from "./loginUser";
 import { serverFetch } from "@/utils/server-fetch";
 import { registerPatientValidationZodSchema } from "@/validation/zod/auth.validation";
@@ -42,7 +42,6 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
         });
 
         const result = await res.json();
-        console.log("Registration Result:", result);
 
         if (result.success) {
             await loginUser(_currentState, formData)
