@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
+import { zodValidate } from "@/error/formValidationError";
 import { loginUser } from "./loginUser";
-import { formValidationError } from "@/error/formValidationError";
 import { serverFetch } from "@/utils/server-fetch";
 import { registerPatientValidationZodSchema } from "@/validation/zod/auth.validation";
 
@@ -17,10 +17,8 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
             address: formData.get("address")
         };
 
-        const validatedFields = registerPatientValidationZodSchema.safeParse(verifyFormData);
-
-        if (!validatedFields.success) {
-            return formValidationError(validatedFields);
+        if (zodValidate(registerPatientValidationZodSchema, verifyFormData).seccess === false) {
+            return zodValidate(registerPatientValidationZodSchema, verifyFormData)
         }
 
         const registerData = {

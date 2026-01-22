@@ -6,7 +6,7 @@ import envVars from "@/config/env";
 import { getDefaultDashboardRoute, isValidRedirectForRole } from "@/utils/auth-utils";
 import { redirect } from "next/navigation";
 import { setCookie, verifyTokenFromCookie } from "@/utils/tokenHandlers";
-import { formValidationError } from "@/error/formValidationError";
+import { zodValidate } from "@/error/formValidationError";
 import { serverFetch } from "@/utils/server-fetch";
 import { loginValidationZodSchema } from "@/validation/zod/auth.validation";
 
@@ -20,10 +20,9 @@ export const loginUser = async (_currentState: any, formData: any) => {
             password: formData.get('password'),
             confirmPassword: formData.get('confirmPassword')
         }
-        const validatedFields = loginValidationZodSchema.safeParse(validationData);
 
-        if(!validatedFields.success) {
-           return formValidationError(validatedFields);
+        if (zodValidate(loginValidationZodSchema, validationData).seccess === false) {
+            return zodValidate(loginValidationZodSchema, validationData)
         }
 
         const loginData = {
