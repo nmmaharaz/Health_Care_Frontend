@@ -1,14 +1,8 @@
 import { useTransition } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useRouter, useSearchParams } from "next/navigation";
-interface SelectFilterProps {
-    paramName: string,
-    placeholder?: string,
-    options: {
-        label: string,
-        value: string
-    }[]
-}
+import { SelectFilterProps } from "@/types/shared.interface";
+
 
 export default function SelectFilter({
     paramName,

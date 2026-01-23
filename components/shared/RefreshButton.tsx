@@ -1,4 +1,5 @@
 "use client"
+import { RefreshButtonProps } from "@/types/shared.interface"
 import { RefreshCcw } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"

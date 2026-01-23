@@ -16,45 +16,6 @@ import { IUserInfo } from "@/types/user";
 import { UserRole } from "@/utils/auth-utils";
 import { getIconComponent } from "@/utils/icon-mapper";
 
-// const navMain = [
-//   {
-//     title: "Dashboard",
-//     items: [
-//       { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
-//       { title: "Analytics", url: "/dashboard/analytics", icon: Database },
-//     ],
-//   },
-//   {
-//     title: "User Management",
-//     items: [
-//       { title: "All Users", url: "/users/all", icon: Users },
-//       { title: "Profile", url: "/users/profile", icon: UserCircle },
-//     ],
-//   },
-//   {
-//     title: "Sales",
-//     items: [
-//       { title: "Orders", url: "/sales/orders", icon: ShoppingCart },
-//       { title: "Invoices", url: "/sales/invoices", icon: FileText },
-//     ],
-//   },
-//   {
-//     title: "Settings",
-//     items: [
-//       { title: "General Settings", url: "/settings/general", icon: Settings },
-//       { title: "Security", url: "/settings/security", icon: ShieldCheck },
-//     ],
-//   },
-//   {
-//     title: "Support",
-//     items: [
-//       { title: "Notifications", url: "/support/notifications", icon: Bell },
-//       { title: "Help Center", url: "/support/help", icon: HelpCircle },
-//     ],
-//   },
-// ];
-
-
 export default function SidebarMenuClient({userInfo}: {userInfo: IUserInfo}) {
   const pathname = usePathname();
   const data = getNavItemsByRole(userInfo.role as UserRole)

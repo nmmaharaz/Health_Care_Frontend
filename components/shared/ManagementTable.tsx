@@ -3,24 +3,7 @@ import React from "react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-
-export interface Column<T> {
-    header: string,
-    accessor: keyof T | ((row: T) => React.ReactNode)
-    className?: string
-}
-
-interface ManagementTableProps<T> {
-    data: T[];
-    columns: Column<T>[];
-    onView?: (row: T) => void;
-    onEdit?: (row: T) => void;
-    onDelete?: (row: T) => void;
-    getRowKey: (row: T) => string;
-    emptyMessage?: string;
-    isRefreshing?: boolean;
-}
-
+import { ManagementTableProps } from "@/types/shared.interface";
 
 export default function ManagementTable<T>({
     data = [],

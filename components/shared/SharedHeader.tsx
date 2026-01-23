@@ -1,10 +1,8 @@
 import cssStyle from './SharedHeader.module.css';
 import styles from "../modules/home/Hero.module.css";
+import { SharedHeaderProps } from '@/types/shared.interface';
 
-const SharedHeader = ({ title, subtitle }: {
-  title: string;
-  subtitle?: string;
-}) => {
+const SharedHeader = ({ title, subtitle }: SharedHeaderProps) => {
   return (
     <section className={`${cssStyle.circle} relative mt-3 mx-7.5 py-8 md:py-12 lg:py-22 bg-[#f4f6ff] overflow-hidden rounded-[40px]`}>
 
