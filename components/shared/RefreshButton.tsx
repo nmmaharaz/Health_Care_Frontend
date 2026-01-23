@@ -3,11 +3,6 @@ import { RefreshCcw } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
 
-interface RefreshButtonProps {
-    className: string,
-    showLabel: string
-}
-
 export default function RefreshButton({ showLabel, className }: RefreshButtonProps) {
     const router = useRouter()
     const [isPending, setTransition] = useTransition()

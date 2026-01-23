@@ -72,7 +72,7 @@ const Footer = () => {
         </div>
 
         <div className="relative pt-10 flex flex-col md:row items-center justify-between gap-6">
-          
+
           {/* {[<Globe size={18}/>, <Facebook size={18}/>, <Instagram size={18}/>].map((icon, index) => (
               <div key={index} className="bg-[#1a2238] p-3 rounded-full text-gray-300 hover:bg-[#4d5edb] hover:text-white cursor-pointer transition-all">
                 {icon}
@@ -96,13 +96,13 @@ const Footer = () => {
           <div className='absolute top-15 left-0 border w-full border-t border-gray-800'></div>
           <div className='flex justify-between w-full'>
             <p className="text-white text-sm">
-            Copyright © 2026 All Rights Reserved.
-          </p>
-          <div className="flex items-center gap-3 text-sm text-white">
-            <Link href="#" className="hover:text-white">Privacy Policy</Link>
-            <span className="w-1.5 h-1.5 rounded-full bg-gray-700"></span>
-            <Link href="#" className="hover:text-white">Terms & Conditions</Link>
-          </div>
+              Copyright © 2026 All Rights Reserved.
+            </p>
+            <div className="flex items-center gap-3 text-sm text-white">
+              <Link href="#" className="hover:text-white">Privacy Policy</Link>
+              <span className="w-1.5 h-1.5 rounded-full bg-gray-700"></span>
+              <Link href="#" className="hover:text-white">Terms & Conditions</Link>
+            </div>
           </div>
         </div>
       </div>
