@@ -1,4 +1,4 @@
-import { ArrowRightIcon, SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import { useId } from "react";
 
 import { Input } from "@/components/ui/input";

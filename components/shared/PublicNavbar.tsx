@@ -8,7 +8,6 @@ import { useTheme } from 'next-themes';
 import { navItems } from '@/app/constant/NavbarItem';
 import styles from '../modules/home/Hero.module.css';
 import { IUserInfo } from '@/types/user';
-import { logOut } from '@/service/auth/logOut';
 import { handleLogout } from '@/utils/handleLogout';
 
 
