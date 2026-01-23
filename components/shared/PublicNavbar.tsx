@@ -9,6 +9,7 @@ import { navItems } from '@/app/constant/NavbarItem';
 import styles from '../modules/home/Hero.module.css';
 import { IUserInfo } from '@/types/user';
 import { logOut } from '@/service/auth/logOut';
+import { handleLogout } from '@/utils/handleLogout';
 
 
 export default function PublicNavbar({ user }: { user: IUserInfo }) {
@@ -46,9 +47,7 @@ export default function PublicNavbar({ user }: { user: IUserInfo }) {
     visible: { opacity: 1, y: 0, scale: 1 },
   };
 
-  const handleLogout = () => {
-    logOut()
-  }
+
 
   return (
     <motion.header
@@ -147,7 +146,7 @@ export default function PublicNavbar({ user }: { user: IUserInfo }) {
 
           {user?.email ?
             (<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <button onClick={handleLogout} className={`${styles.btn} ${styles.primary}`}>
+              <button onClick={()=>handleLogout()} className={`${styles.btn} ${styles.primary}`}>
                 Logout
               </button>
             </motion.div>) :

@@ -88,10 +88,10 @@ export default function SidebarMenuClient({userInfo}: {userInfo: IUserInfo}) {
                     </div>
 
                     <SidebarMenuSubButton asChild>
-                      <p
+                       <p
                         className={`text-sm font-semibold ${
                           isActive
-                            ? "text-black"
+                            ? "text-[#4338ca]"
                             : "text-gray-500"
                         }`}
                       >
