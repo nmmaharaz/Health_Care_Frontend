@@ -1,4 +1,4 @@
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { redirect, useSearchParams } from "next/navigation";
 interface SelectFilterProps {
@@ -31,7 +31,6 @@ export default function SelectFilter({
         startTransition(()=>{
             redirect(`?${params.toString()}`)
         })
-
     }
 
     return (
@@ -40,11 +39,9 @@ export default function SelectFilter({
             value={currentValue}
             onValueChange={handleValue}
             disabled={isPending}
-            // defaultValue="2"
             >
                 <SelectTrigger
                     className="border-transparent bg-muted shadow-none"
-                // id={id}
                 >
                     <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
