@@ -11,72 +11,67 @@ import {
   SidebarMenuSubButton,
 } from "@/components/ui/sidebar";
 
-import {
-  LayoutDashboard,
-  UserCircle,
-  Settings,
-  FileText,
-  Users,
-  ShoppingCart,
-  Bell,
-  ShieldCheck,
-  Database,
-  HelpCircle,
-} from "lucide-react";
+import { getNavItemsByRole } from "./DashboardNavItem";
+import { IUserInfo } from "@/types/user";
+import { UserRole } from "@/utils/auth-utils";
+import { getIconComponent } from "@/utils/icon-mapper";
 
-const navMain = [
-  {
-    title: "Dashboard",
-    items: [
-      { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
-      { title: "Analytics", url: "/dashboard/analytics", icon: Database },
-    ],
-  },
-  {
-    title: "User Management",
-    items: [
-      { title: "All Users", url: "/users/all", icon: Users },
-      { title: "Profile", url: "/users/profile", icon: UserCircle },
-    ],
-  },
-  {
-    title: "Sales",
-    items: [
-      { title: "Orders", url: "/sales/orders", icon: ShoppingCart },
-      { title: "Invoices", url: "/sales/invoices", icon: FileText },
-    ],
-  },
-  {
-    title: "Settings",
-    items: [
-      { title: "General Settings", url: "/settings/general", icon: Settings },
-      { title: "Security", url: "/settings/security", icon: ShieldCheck },
-    ],
-  },
-  {
-    title: "Support",
-    items: [
-      { title: "Notifications", url: "/support/notifications", icon: Bell },
-      { title: "Help Center", url: "/support/help", icon: HelpCircle },
-    ],
-  },
-];
+// const navMain = [
+//   {
+//     title: "Dashboard",
+//     items: [
+//       { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
+//       { title: "Analytics", url: "/dashboard/analytics", icon: Database },
+//     ],
+//   },
+//   {
+//     title: "User Management",
+//     items: [
+//       { title: "All Users", url: "/users/all", icon: Users },
+//       { title: "Profile", url: "/users/profile", icon: UserCircle },
+//     ],
+//   },
+//   {
+//     title: "Sales",
+//     items: [
+//       { title: "Orders", url: "/sales/orders", icon: ShoppingCart },
+//       { title: "Invoices", url: "/sales/invoices", icon: FileText },
+//     ],
+//   },
+//   {
+//     title: "Settings",
+//     items: [
+//       { title: "General Settings", url: "/settings/general", icon: Settings },
+//       { title: "Security", url: "/settings/security", icon: ShieldCheck },
+//     ],
+//   },
+//   {
+//     title: "Support",
+//     items: [
+//       { title: "Notifications", url: "/support/notifications", icon: Bell },
+//       { title: "Help Center", url: "/support/help", icon: HelpCircle },
+//     ],
+//   },
+// ];
 
-export default function SidebarMenuClient() {
+
+export default function SidebarMenuClient({userInfo}: {userInfo: IUserInfo}) {
   const pathname = usePathname();
+  const data = getNavItemsByRole(userInfo.role as UserRole)
 
   return (
     <SidebarMenu>
-      {navMain.map((group) => (
-        <SidebarMenuItem key={group.title}>
+      {data.map((group, index) => (
+        <SidebarMenuItem key={index}>
           <SidebarMenuSub>
-            {group.items.map((item) => {
-              const isActive = pathname === item.url;
+            {group.items.map((item, index) => {
+              const isActive = pathname === item.href;
+              const Icon = getIconComponent(item.icon)
 
               return (
                 <Link
-                  key={item.title}
-                  href={item.url}
+                  key={index}
+                  href={item.href}
                   className={`mt-2 block rounded-md ${
                     isActive ? "bg-white shadow-sm" : ""
                   }`}
@@ -85,11 +80,11 @@ export default function SidebarMenuClient() {
                     <div
                       className={`rounded-md p-1 ${
                         isActive
-                          ? "bg-[linear-gradient(136deg,#9A0493_0%,#B317AA_50%,#B317AA_100%)]"
+                          ? "bg-linear-to-br bg-[#4338ca], bg-[#4f6ad4f1]"
                           : "bg-[#ccc]"
                       }`}
                     >
-                      <item.icon className="size-4 text-white" />
+                      <Icon className="size-4 text-white" />
                     </div>
 
                     <SidebarMenuSubButton asChild>

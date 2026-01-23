@@ -13,13 +13,15 @@ import {
 } from "@/components/ui/sidebar"
 
 import SidebarMenuClient from "./SidebarMenuClient";
+import { getUserInfo } from "@/service/auth/user";
+import { IUserInfo } from "@/types/user";
 
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-
+export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const userInfo = await getUserInfo() as IUserInfo
   return (
     <Sidebar {...props}>
-      <div className="bg-[#F8F9FA]">
+      <div>
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
@@ -46,7 +48,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarContent>
           <SidebarGroup>
             <SidebarMenu>
-              <SidebarMenuClient></SidebarMenuClient>
+              <SidebarMenuClient userInfo={userInfo}></SidebarMenuClient>
             </SidebarMenu>
           </SidebarGroup>
         </SidebarContent>

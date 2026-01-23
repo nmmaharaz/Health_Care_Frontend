@@ -7,14 +7,15 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { navItems } from '@/app/constant/NavbarItem';
 import styles from '../modules/home/Hero.module.css';
+import { IUserInfo } from '@/types/user';
+import { logOut } from '@/service/auth/logOut';
 
 
-export default function PublicNavbar() {
+export default function PublicNavbar({ user }: { user: IUserInfo }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { theme } = useTheme();
-  const accessToken = false
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +45,10 @@ export default function PublicNavbar() {
     hidden: { opacity: 0, y: -10, scale: 0.95 },
     visible: { opacity: 1, y: 0, scale: 1 },
   };
+
+  const handleLogout = () => {
+    logOut()
+  }
 
   return (
     <motion.header
@@ -140,16 +145,11 @@ export default function PublicNavbar() {
             ))}
           </nav>
 
-          {accessToken ?
+          {user?.email ?
             (<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                prefetch={false}
-                href="/logout"
-              >
-                <button className={`${styles.btn} ${styles.primary}`}>
-                  Logout
-                </button>
-              </Link>
+              <button onClick={handleLogout} className={`${styles.btn} ${styles.primary}`}>
+                Logout
+              </button>
             </motion.div>) :
             (<div className="hidden items-center space-x-4 lg:flex">
               <Link

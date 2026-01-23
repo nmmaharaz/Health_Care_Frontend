@@ -12,7 +12,6 @@ import { loginValidationZodSchema } from "@/validation/zod/auth.validation";
 
 export const loginUser = async (_currentState: any, formData: any) => {
     try {
-        console.log("Hellow mana")
         const redirectTo = formData.get('redirect') || null;
         let accessTokenObj: null | any = null
         let refreshTokenObj: null | any = null
