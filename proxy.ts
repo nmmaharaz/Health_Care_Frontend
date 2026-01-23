@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken"
 import envVars from "./config/env";
 import { getDefaultDashboardRoute, getRouteOwner, isAuthRoute, UserRole } from "./utils/auth-utils";
-import { deleteCookie, getCookie, verifyTokenFromCookie } from "./utils/tokenHandlers";
+import { deleteCookie, getCookie} from "./utils/tokenHandlers";
 
 
 export const proxy = async (req: NextRequest) => {
@@ -14,7 +14,7 @@ export const proxy = async (req: NextRequest) => {
 
 
     if (accessToken) {
-        const verifiedToken: string | jwt.JwtPayload = verifyTokenFromCookie(accessToken, envVars.jwt.jwt_access_secret)
+        const verifiedToken: string | jwt.JwtPayload = jwt.verify(accessToken, envVars.jwt.jwt_access_secret)
        
         if (typeof verifiedToken === "string") {
             deleteCookie("accessToken");

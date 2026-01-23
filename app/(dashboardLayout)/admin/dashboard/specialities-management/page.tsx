@@ -1,5 +1,5 @@
-export default function page() {
+export default function SpecialitiesManagementPage() {
   return (
-    <div>admin page</div>
+    <div>SpecialitiesManagementPage</div>
   )
 }

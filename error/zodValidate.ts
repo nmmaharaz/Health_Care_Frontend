@@ -1,5 +1,6 @@
 import { ZodObject } from "zod"
 
+
 export const zodValidate = <T>(payload: T, schema: ZodObject) => {
     const validatedPayload = schema.safeParse(payload)
 

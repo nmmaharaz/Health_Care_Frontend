@@ -17,10 +17,9 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
             address: formData.get("address")
         };
 
-        if (zodValidate(registerPatientValidationZodSchema, verifyFormData).seccess === false) {
-            return zodValidate(registerPatientValidationZodSchema, verifyFormData)
+        if (zodValidate(verifyFormData, registerPatientValidationZodSchema).success === false) {
+            return zodValidate(verifyFormData, registerPatientValidationZodSchema);
         }
-
         const registerData = {
             password: formData.get('password'),
             patient: {
