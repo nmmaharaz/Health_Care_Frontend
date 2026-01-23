@@ -1,6 +1,6 @@
 import { useTransition } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { redirect, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 interface SelectFilterProps {
     paramName: string,
     placeholder?: string,
@@ -16,6 +16,7 @@ export default function SelectFilter({
     options,
 }: SelectFilterProps) {
     const searchParams = useSearchParams()
+    const router = useRouter()
     const [isPending, startTransition] = useTransition()
     const currentValue = searchParams.get(paramName) || "All"
 
@@ -29,7 +30,7 @@ export default function SelectFilter({
             params.delete(paramName)
         }
         startTransition(()=>{
-            redirect(`?${params.toString()}`)
+            router.push(`?${params.toString()}`)
         })
     }
 
