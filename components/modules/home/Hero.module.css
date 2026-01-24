@@ -247,14 +247,14 @@
 
 
 .circleBg {
-  width: 420px;
-  height: 420px;
+  width: 320px;
+  height: 320px;
   
 }
 
 .circleBg1 {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   border: 30px solid #e0e7ff;
   position: absolute;

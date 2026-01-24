@@ -10,9 +10,9 @@ export default function DashbordLayoutStyle({ children }: { children: React.Reac
         <div>
             <SidebarProvider>
                 <AppSidebar />
-                <SidebarInset className="bg-sidebar" >
-                    <header className=" shrink-0 py-1 px-8 drop-shadow-md bg-white">
-                        <div className="flex items-center justify-between gap-2 px-3">
+                <SidebarInset className="" >
+                    <header className=" shrink-0 py-1 px-4 md:px-4 lg:px-8 border-b border-gray-100 bg-white">
+                        <div className="flex items-center justify-between gap-2">
                             <SidebarTrigger className='md:hidden'><Menu /></SidebarTrigger>
                             <SearchInputFeild></SearchInputFeild>
                             <div className="flex items-center justify-between px-4 py-3 gap-3 rounded-lg w-fit">
@@ -24,7 +24,7 @@ export default function DashbordLayoutStyle({ children }: { children: React.Reac
                             {/* <Separator orientation="vertical" className="mr-2 h-4" /> */}
                         </div>
                     </header>
-                    <div className="px-12 bg-sidebar">
+                    <div className="px-4 lg:px-8">
                         {/* <Outlet></Outlet> */}
                         {children}
                     </div>
