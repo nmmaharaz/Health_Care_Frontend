@@ -12,6 +12,30 @@ import { handleLogout } from '@/utils/handleLogout';
 
 
 export default function PublicNavbar({ user }: { user: IUserInfo }) {
+
+  // const totalpage = 20
+  // const currentpage = 7
+
+  // const data = Array.from({ length: Math.min(5, totalpage) }, (v, k) => {
+  //   let pathname
+  //   if (currentpage <= 5) {
+  //     pathname = k + 1
+  //   } else if (currentpage <= 3) {
+  //     pathname = k + 1
+  //   } else if (currentpage >= totalpage - 2) {
+  //     pathname = totalpage - 4 + k;
+  //   } else {
+  //     pathname = currentpage - 2 + k;
+  //   }
+  //   console.log(k)
+  //   console.log(pathname, "pathname")
+  // })
+
+  // console.log(data, "data")
+
+
+
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -145,7 +169,7 @@ export default function PublicNavbar({ user }: { user: IUserInfo }) {
 
           {user?.email ?
             (<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <button onClick={()=>handleLogout()} className={`${styles.btn} ${styles.primary}`}>
+              <button onClick={() => handleLogout()} className={`${styles.btn} ${styles.primary}`}>
                 Logout
               </button>
             </motion.div>) :
