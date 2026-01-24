@@ -29,8 +29,12 @@ export const proxy = async (req: NextRequest) => {
 
         } catch (error: any) {
             if (error.name === "TokenExpiredError") {
+                deleteCookie("accessToken");
+                deleteCookie("refreshToken")
                 console.log("JWT expired")
             } else {
+                deleteCookie("accessToken");
+                deleteCookie("refreshToken")
                 console.log("Invalid token")
             }
         }
@@ -65,8 +69,6 @@ export const proxy = async (req: NextRequest) => {
 
     return NextResponse.next();
 }
-
-
 
 export const config = {
     matcher: [
