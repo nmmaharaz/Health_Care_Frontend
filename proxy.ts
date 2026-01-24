@@ -1,30 +1,40 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use server"
 import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken"
 import envVars from "./config/env";
 import { getDefaultDashboardRoute, getRouteOwner, isAuthRoute, UserRole } from "./utils/auth-utils";
-import { deleteCookie, getCookie} from "./utils/tokenHandlers";
+import jwt from "jsonwebtoken"
+import { deleteCookie, getCookie } from "./utils/tokenHandlers";
+import { verifyTokenFromCookie } from "./utils/verifyToken";
 
 
 export const proxy = async (req: NextRequest) => {
     const pathname = req.nextUrl.pathname;
-
     const accessToken = await getCookie("accessToken") || null
-
     let userRole: UserRole | null = null
 
-
     if (accessToken) {
-        const verifiedToken: string | jwt.JwtPayload = jwt.verify(accessToken, envVars.jwt.jwt_access_secret)
-       
-        if (typeof verifiedToken === "string") {
-            deleteCookie("accessToken");
-            deleteCookie("refreshToken");
-            return NextResponse.redirect(new URL("/login", req.url))
-        }
-        userRole = verifiedToken.role
-    }
+        try {
+            const verifiedToken: string | jwt.JwtPayload = verifyTokenFromCookie(
+                accessToken,
+                envVars.jwt.jwt_access_secret
+            )
 
-    // console.log(userRole, "accessToken")
+            if (typeof verifiedToken === "string") {
+                deleteCookie("accessToken");
+                deleteCookie("refreshToken");
+                return NextResponse.redirect(new URL("/login", req.url))
+            }
+            userRole = verifiedToken.role
+
+        } catch (error: any) {
+            if (error.name === "TokenExpiredError") {
+                console.log("JWT expired")
+            } else {
+                console.log("Invalid token")
+            }
+        }
+    }
 
     const routerOwner = getRouteOwner(pathname);
     const isAuth = isAuthRoute(pathname)
