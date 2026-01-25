@@ -5,12 +5,9 @@ const serverFetchHelper = async (endpoint: string, options: RequestInit): Promis
     const { headers, ...restOptions } = options;
 
     const accessToken = await getCookie("accessToken");
-
     const response = await fetch(`${envVars.api}${endpoint}`, {
         headers: {
             ...headers,
-            // ...(accessToken ? { "Authorization": `Bearer ${accessToken}` } : {}),
-            // ...(accessToken ? { "Authorization": accessToken } : {}),
             Cookie: accessToken ? `accessToken=${accessToken}` : "",
         },
         ...restOptions,

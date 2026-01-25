@@ -1,6 +1,6 @@
 import { ShieldCheck, Car, Briefcase } from 'lucide-react';
 import CategoryCard from './CategoryCard';
-import styles from './Hero.module.css';
+import styles from '@/css/Hero.module.css';
 
 export default function Category() {
   const services = [

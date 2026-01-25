@@ -5,6 +5,6 @@ import { redirect } from "next/navigation"
 
 export const logOut = async() =>{
     await deleteCookie("accessToken")
-    await deleteCookie("resfreshToken")
+    await deleteCookie("refreshToken")
     return redirect("/login?loggedOut=true")
 }

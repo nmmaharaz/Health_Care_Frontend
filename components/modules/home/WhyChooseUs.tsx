@@ -1,6 +1,6 @@
 "use client"; // Next.js App Router hole oboshoy diten hobe
 import React, { useState } from 'react';
-import styles from './Hero.module.css';
+import styles from '@/css/Hero.module.css';
 import Image from 'next/image';
 import { Play, Stethoscope, Clock, ShieldPlus, CheckCircle2 } from 'lucide-react';
 import VideoModal from './VideoModal';

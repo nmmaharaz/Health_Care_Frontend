@@ -1,7 +1,7 @@
 // "use client"
 
 import { IoIosPeople } from "react-icons/io";
-import styles from "./Hero.module.css";
+import styles from '../../../css/Hero.module.css';
 import Image from "next/image";
 
 export default function Hero() {

@@ -6,10 +6,9 @@ import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { navItems } from '@/app/constant/NavbarItem';
-import styles from '../modules/home/Hero.module.css';
+import styles from '../../css/Hero.module.css';
 import { IUserInfo } from '@/types/user';
 import { handleLogout } from '@/utils/handleLogout';
-
 
 export default function PublicNavbar({ user }: { user: IUserInfo }) {
 
@@ -32,9 +31,6 @@ export default function PublicNavbar({ user }: { user: IUserInfo }) {
   // })
 
   // console.log(data, "data")
-
-
-
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

@@ -1,5 +1,5 @@
-import cssStyle from './SharedHeader.module.css';
-import styles from "../modules/home/Hero.module.css";
+import cssStyle from '../../css/SharedHeader.module.css';
+import styles from "../../css/Hero.module.css";
 import { SharedHeaderProps } from '@/types/shared.interface';
 
 const SharedHeader = ({ title, subtitle }: SharedHeaderProps) => {

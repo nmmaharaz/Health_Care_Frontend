@@ -1,10 +1,10 @@
-import cssStyle from './SharedHeader.module.css';
+// import cssStyle from './SharedHeader.module.css';
+import cssStyle from '@/css/SharedHeader.module.css';
 import { SharedHeaderProps } from '@/types/shared.interface';
 
 const DashboardHeader = ({ title, subtitle }: SharedHeaderProps) => {
   return (
     <section className={`${cssStyle.circle} relative mt-3 py-4 md:py-12 bg-[#f4f6ff] overflow-hidden rounded-2xl`}>
-
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#7367f0] opacity-5 rounded-tr-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-[#7367f0] opacity-10 rounded-tl-full blur-2xl"></div>
 

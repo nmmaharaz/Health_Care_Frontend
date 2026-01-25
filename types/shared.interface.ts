@@ -1,6 +1,6 @@
 export interface SharedHeaderProps {
-        title: string;
-        subtitle?: string;
+    title: string;
+    subtitle?: string;
 }
 
 export interface RefreshButtonProps {
