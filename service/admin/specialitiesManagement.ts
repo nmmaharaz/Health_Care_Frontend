@@ -36,7 +36,7 @@ export const createSpecialities = async (_previewState: any, formData: FormData)
     }
 }
 
-const getAllSpecialities = async (queryString?: string) => {
+export const getAllSpecialities = async (queryString?: string) => {
     try {
         const response = await serverFetch.get(`/specialties${queryString ? queryString : ""}`)
         return await response.json()
