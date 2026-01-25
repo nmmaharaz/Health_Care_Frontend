@@ -1,5 +1,4 @@
 import cssStyle from './SharedHeader.module.css';
-import styles from "../modules/home/Hero.module.css";
 import { SharedHeaderProps } from '@/types/shared.interface';
 
 const DashboardHeader = ({ title, subtitle }: SharedHeaderProps) => {
