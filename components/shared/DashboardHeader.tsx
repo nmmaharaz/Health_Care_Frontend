@@ -16,7 +16,7 @@ const DashboardHeader = ({ title, subtitle }: SharedHeaderProps) => {
 
         <div className="flex justify-center">
           <button className={`${styles.btn} ${styles.primary} text-sm`}>
-            <p>{subtitle}</p>
+            {subtitle}
           </button>
         </div>
       </div>

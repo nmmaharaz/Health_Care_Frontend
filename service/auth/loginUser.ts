@@ -8,7 +8,8 @@ import { redirect } from "next/navigation";
 import { setCookie } from "@/utils/tokenHandlers";
 import { serverFetch } from "@/utils/server-fetch";
 import { zodValidate } from "@/error/zodValidate";
-import { loginValidationZodSchema } from "@/validation/zod/auth.validation";
+import { loginValidationZodSchema } from "@/validation/zod/auth/auth.validation";
+// import { loginValidationZodSchema } from "@/validation/zod/auth.validation";
 
 export const loginUser = async (_currentState: any, formData: any) => {
     try {

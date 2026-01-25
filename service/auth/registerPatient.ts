@@ -3,7 +3,7 @@
 import { zodValidate } from "@/error/zodValidate";
 import { loginUser } from "./loginUser";
 import { serverFetch } from "@/utils/server-fetch";
-import { registerPatientValidationZodSchema } from "@/validation/zod/auth.validation";
+import { registerPatientValidationZodSchema } from "@/validation/zod/auth/auth.validation";
 
 export const regiterPatient = async (_currentState: any, formData: any) => {
     try {
@@ -20,6 +20,7 @@ export const regiterPatient = async (_currentState: any, formData: any) => {
         if (zodValidate(verifyFormData, registerPatientValidationZodSchema).success === false) {
             return zodValidate(verifyFormData, registerPatientValidationZodSchema);
         }
+
         const registerData = {
             password: formData.get('password'),
             patient: {
