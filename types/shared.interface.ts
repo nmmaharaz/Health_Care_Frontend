@@ -4,8 +4,8 @@ export interface SharedHeaderProps {
 }
 
 export interface RefreshButtonProps {
-    className: string,
-    showLabel: string
+    className?: string,
+    showLabel?: string
 }
 
 

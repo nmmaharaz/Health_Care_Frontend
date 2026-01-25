@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { zodValidate } from "@/error/zodValidate";
 import { serverFetch } from "@/utils/server-fetch"
 import { createSpecialityZodSchema } from "@/validation/zod/admin/specialties.validation";

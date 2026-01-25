@@ -15,7 +15,7 @@ const DashboardHeader = ({ title, subtitle }: SharedHeaderProps) => {
         </h1>
 
         <div className="flex justify-center">
-          <button className={`${styles.btn} ${styles.primary} text-sm`}>
+          <button className={`bg-linear-to-r from-[#4338ca] to-[#4f6ad4f1] px-4 py-2 text-sm font-semibold rounded-2xl text-white`}>
             {subtitle}
           </button>
         </div>
