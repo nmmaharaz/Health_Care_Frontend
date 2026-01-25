@@ -24,7 +24,7 @@ export const createSpecialities = async (_previewState: any, formData: FormData)
         }
 
         const response = await serverFetch.get("/specialties", {
-            body: 
+            body: newFormData
         })
         return await response.json()
     } catch (error) {
