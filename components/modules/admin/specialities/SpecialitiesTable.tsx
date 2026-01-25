@@ -3,7 +3,6 @@ import ManagementTable from "@/components/shared/Dashboard/ManagementTable"
 import { ISpecialitiesProps, ISpecialty } from "@/types/admin/secialities.interface"
 import { SpecialitiesColumns } from "./SpecialitiesColumns"
 import { useState, useTransition } from "react"
-// import DeleteConfirmationDialog from "@/components/shared/Dashboard/DeleteConfirmationDialog"
 import { useRouter } from "next/navigation"
 import { deleteSpeciality } from "@/service/admin/specialitiesManagement"
 import { toast } from "sonner"
@@ -57,7 +56,6 @@ export default function SpecialitiesTable({ specialities }: ISpecialitiesProps) 
                 title="Delete Speciality"
                 description={`Are you sure you want to delete ${deletingSpeciality?.title}? This action cannot be undone.`}>
             </DeleteConfirmationDialog>
-            {/* <AlertDialogBasic></AlertDialogBasic> */}
         </>
     )
 }
