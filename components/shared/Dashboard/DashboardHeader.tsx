@@ -1,4 +1,3 @@
-// import cssStyle from './SharedHeader.module.css';
 import cssStyle from '@/css/SharedHeader.module.css';
 import { SharedHeaderProps } from '@/types/shared.interface';
 

@@ -8,3 +8,15 @@ export interface ISpecialty {
 export interface ISpecialitiesProps {
     specialities: ISpecialty[]
 }
+
+export interface ICreateButton {
+    label: string,
+    onClick: () => void
+}
+
+
+export interface ISpecialitiesCreateProps {
+    open: boolean,
+    onClose: () => void,
+    onSuccess: () => void
+}

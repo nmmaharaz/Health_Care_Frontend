@@ -15,7 +15,7 @@ export default function DashbordLayoutStyle({ children }: { children: React.Reac
                         <div className="flex items-center justify-between gap-2">
                             <SidebarTrigger className='md:hidden'><Menu /></SidebarTrigger>
                             <SearchInputFeild></SearchInputFeild>
-                            <div className="flex items-center justify-between px-4 py-3 gap-3 rounded-lg w-fit">
+                            <div className="flex items-center justify-between px-4 cursor-pointer py-3 gap-3 rounded-lg w-fit">
                                 <UserProfileDropdown></UserProfileDropdown>
                                 {/* <button className="ml-4 text-gray-500 hover:text-gray-700 transition">
                                     <Settings size={22} />
