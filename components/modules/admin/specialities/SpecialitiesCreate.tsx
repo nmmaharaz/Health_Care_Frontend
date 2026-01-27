@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
+import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -9,7 +9,7 @@ import { useFileUpload } from "@/hooks/use-file-upload";
 import { createSpecialities } from "@/service/admin/specialitiesManagement";
 import { ISpecialitiesCreateProps } from "@/types/admin/secialities.interface";
 import { AlertCircleIcon, ImageIcon, UploadIcon, XIcon } from "lucide-react";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
 export default function SpecialitiesCreate({ open, onClose, onSuccess }: ISpecialitiesCreateProps) {
@@ -35,11 +35,29 @@ export default function SpecialitiesCreate({ open, onClose, onSuccess }: ISpecia
     const previewUrl = files[0]?.preview || null;
     const file = files[0]?.file;
     const [state, formAction, pending] = useActionState(createSpecialities.bind(null, file), null)
-    if (state?.success) {
-        toast.success(state.message);
-        onSuccess();
-        onClose();
-    }
+
+    useEffect(() => {
+        if (!state) return
+
+        if (state.success) {
+            toast.success(state.message)
+            onSuccess()
+            onClose()
+            
+        } else {
+            toast.error(state.message)
+        }
+    }, [state, onSuccess, onClose])
+
+    // useEffect(() => {
+    //     if (state && state?.success) {
+    //         toast.success(state.message);
+    //         onSuccess();
+    //         onClose();
+    //     } else if (state && !state.success) {
+    //         toast.error(state.message);
+    //     }
+    // },  [state, onSuccess, onClose])
     return (
         <AlertDialog open={open} onOpenChange={onClose}>
             {/* <AlertDialogTitle>Create Speciality</AlertDialogTitle> */}
@@ -151,7 +169,7 @@ export default function SpecialitiesCreate({ open, onClose, onSuccess }: ISpecia
                     </FieldGroup>
 
                     <div className="flex justify-end gap-4 mt-4">
-                        <Button className="text-[#E71F23] bg-white hover:bg-gray-50 border" disabled={pending}>Cancel</Button>
+                        <Button onClick={onClose} className="text-[#E71F23] bg-white hover:bg-gray-50 border" disabled={pending}>Cancel</Button>
                         <Button type="submit" className="bg-linear-to-r from-[#4338ca] to-[#4f6ad4f1] hover:bg-linear-to-r hover:from-[#3a2fac] hover:to-[#4f69d0f1]" disabled={pending}>{pending ? "Pending..." : "Submit"}</Button>
                     </div>
 

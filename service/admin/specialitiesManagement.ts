@@ -31,7 +31,6 @@ export const createSpecialities = async (file:any, _previewState: any, formData:
         const response = await serverFetch.post("/specialties", {
             body: newFormData
         })
-        // console.log(await response.json())
         return await response.json()
     } catch (error) {
         console.log(error, "Specialities Error")

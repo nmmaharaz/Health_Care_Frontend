@@ -6,7 +6,7 @@ export const SpecialitiesColumns: Column<ISpecialty>[] = [
     {
         header:"Icon",
         accessor: (speciality)=>(
-            <Image alt={speciality.title} src={speciality.icon} width={40} height={40} className="rounded-full"></Image>
+            <Image alt={speciality.title} src={speciality.icon} width={40} height={40} className="rounded-full w-10 h-10 "></Image>
         )
     },
     {
