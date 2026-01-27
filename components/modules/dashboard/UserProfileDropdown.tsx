@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { CreditCardIcon, SettingsIcon, UserIcon } from "lucide-react";
 import DashboardLogout from "./DashboardLogout";
+import Link from "next/link";
 
 export default function UserProfileDropdown() {
     return (
@@ -30,10 +31,12 @@ export default function UserProfileDropdown() {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        <Link href="/my-profile">
         <DropdownMenuItem>
           <UserIcon />
           Profile
         </DropdownMenuItem>
+        </Link>
         <DropdownMenuItem>
           <CreditCardIcon />
           Billing

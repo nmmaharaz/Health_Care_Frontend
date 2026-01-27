@@ -17,7 +17,7 @@ export default function ManagementTable<T>({
 }: ManagementTableProps<T>) {
     const hasActions = onView || onEdit || onDelete;
     return (
-       <div className="rounded-lg border relative">
+       <div className="rounded-lg overflow-hidden border relative">
         {/* Refreshing Overlay */}
         {isRefreshing && (
           <div className="absolute inset-0 bg-background/50 backdrop-blur-[2px] flex items-center justify-center z-10 rounded-lg">
@@ -30,7 +30,7 @@ export default function ManagementTable<T>({
 
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-[#F9F9F9]">
               {columns?.map((column, colIndex) => (
                 <TableHead key={colIndex} className={column.className}>
                   {column.header}
