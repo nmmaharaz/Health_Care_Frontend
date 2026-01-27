@@ -4,13 +4,13 @@ import { zodValidate } from "@/error/zodValidate";
 import { serverFetch } from "@/utils/server-fetch"
 import { createSpecialityZodSchema } from "@/validation/zod/admin/specialties.validation";
 
-export const createSpecialities = async (_previewState: any, formData: FormData) => {
+export const createSpecialities = async (file:any, _previewState: any, formData: FormData) => {
     try {
-        const text = {
-            title: formData.get("title") as string,
-            file: formData.get("file") as string
-        }
-        console.log(text, "text")
+        // const text = {
+        //     title: formData.get("title") as string,
+        //     file: formData.get("demo")
+        // }
+        // console.log(text, "text")
         const payload = {
             title: formData.get("title") as string
         }
@@ -20,17 +20,18 @@ export const createSpecialities = async (_previewState: any, formData: FormData)
         }
 
         const validatedPayload = zodValidate(payload, createSpecialityZodSchema).data;
-
+        console.log(validatedPayload)
         const newFormData = new FormData()
         newFormData.append("data", JSON.stringify(validatedPayload))
 
-        if (formData.get("file")) {
-            newFormData.append("file", formData.get("file") as Blob)
+        if (file) {
+            newFormData.append("file", file as Blob) 
         }
-
-        const response = await serverFetch.get("/specialties", {
+        console.log(newFormData)
+        const response = await serverFetch.post("/specialties", {
             body: newFormData
         })
+        // console.log(await response.json())
         return await response.json()
     } catch (error) {
         console.log(error, "Specialities Error")
