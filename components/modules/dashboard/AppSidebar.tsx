@@ -1,4 +1,4 @@
-import { GalleryVerticalEnd, X } from "lucide-react"
+import { X } from "lucide-react"
 
 import {
   Sidebar,
@@ -28,12 +28,12 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
               <div className="flex justify-between">
                 <SidebarMenuButton size="lg" asChild>
                   <a href="#">
-                    <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                    {/* <div className="bg-sidebar-primary  text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                       <GalleryVerticalEnd className="size-4" />
-                    </div>
-                    <div className="flex flex-col gap-0.5 leading-none">
-                      <span className="font-medium">Documentation</span>
-                      <span className="">v1.0.0</span>
+                    </div> */}
+                    <div className="flex pl-9 flex-col gap-0.5 leading-none">
+                      <span className="text-[#4338ca] font-bold text-2xl">Health Care</span>
+                      {/* <span className="">v1.0.0</span> */}
                     </div>
                   </a>
                 </SidebarMenuButton>
