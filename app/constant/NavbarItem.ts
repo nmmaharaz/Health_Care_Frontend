@@ -1,3 +1,5 @@
+import { getDefaultDashboardRoute, UserRole } from "@/utils/auth-utils";
+import { boolean } from "zod";
 
 interface NavItem {
   name: string;
@@ -6,27 +8,29 @@ interface NavItem {
   dropdownItems?: { name: string; href: string; description?: string }[];
 }
 
-export const navItems: NavItem[] = [
-  { name: 'Home', href: '/' },
-  { name: 'Features', href: '/features' },
-  {
-    name: 'Products',
-    href: '/products',
-    hasDropdown: true,
-    dropdownItems: [
-      {
-        name: 'Analytics',
-        href: '/analytics',
-        description: 'Track your metrics',
-      },
-      {
-        name: 'Dashboard',
-        href: '/dashboard',
-        description: 'Manage your data',
-      },
-      { name: 'Reports', href: '/reports', description: 'Generate insights' },
-    ],
-  },
-  { name: 'Pricing', href: '/pricing' },
-  { name: 'About', href: '/about' },
-];
+export const navItems = (role: UserRole): NavItem[] => {
+  let defaultDashboard
+  if (role) {
+    defaultDashboard = getDefaultDashboardRoute(role)
+  };
+  return [
+    { name: 'Home', href: '/' },
+    { name: 'Features', href: '/features' },
+
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'About', href: '/about' },
+    role ? {
+      name: 'Profile',
+      href: '/my-profile',
+      hasDropdown: true,
+      dropdownItems: [
+        {
+          name: 'Dashboard',
+          href: defaultDashboard as string,
+          description: 'Manage your data',
+        },
+        { name: 'Reports', href: '/reports', description: 'Generate insights' },
+      ],
+    }:null,
+  ].filter(Boolean) as NavItem[]
+};

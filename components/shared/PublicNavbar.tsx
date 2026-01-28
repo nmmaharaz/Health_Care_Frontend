@@ -5,10 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { navItems } from '@/app/constant/NavbarItem';
 import styles from '../../css/Hero.module.css';
 import { IUserInfo } from '@/types/user';
 import { handleLogout } from '@/utils/handleLogout';
+import { UserRole } from '@/utils/auth-utils';
+import { navItems } from '@/app/constant/NavbarItem';
 
 export default function PublicNavbar({ user }: { user: IUserInfo }) {
 
@@ -66,7 +67,7 @@ export default function PublicNavbar({ user }: { user: IUserInfo }) {
     visible: { opacity: 1, y: 0, scale: 1 },
   };
 
-
+  const navItem = navItems(user?.role as UserRole)
 
   return (
     <motion.header
@@ -107,7 +108,7 @@ export default function PublicNavbar({ user }: { user: IUserInfo }) {
           </motion.div>
 
           <nav className="hidden items-center space-x-8 lg:flex">
-            {navItems.map((item) => (
+            {navItem.map((item) => (
               <div
                 key={item.name}
                 className="relative"
@@ -214,7 +215,7 @@ export default function PublicNavbar({ user }: { user: IUserInfo }) {
                 transition={{ duration: 0.3, ease: 'easeOut' }}
               >
                 <div className="border-border bg-background/95 mt-4 space-y-2 rounded-xl border py-4 backdrop-blur-lg">
-                  {navItems.map((item) => (
+                  {navItem.map((item) => (
                     <Link
                       prefetch={false}
                       key={item.name}
