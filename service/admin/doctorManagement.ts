@@ -42,7 +42,7 @@ export const createDoctor = async (file: any, _previewState: any, formData: Form
         })
         return await response.json()
     } catch (error) {
-        console.log(error, "Specialities Error")
+        console.log(error, "Doctor Error")
         return {
             success: false,
             message: "Something went wrong"
