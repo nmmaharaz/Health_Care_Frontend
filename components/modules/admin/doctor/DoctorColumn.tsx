@@ -12,7 +12,7 @@ export const doctorsColumns: Column<IDoctor>[] = [
   {
     header: "Doctor",
     accessor: (doctor) => (
-      <UserInfoCell
+       <UserInfoCell
         name={doctor.name}
         email={doctor.email}
         photo={doctor.profilePhoto}

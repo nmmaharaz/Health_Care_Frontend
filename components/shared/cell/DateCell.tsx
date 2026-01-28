@@ -1,6 +1,7 @@
 "use client";
 
-import { formatDateTime } from "@/lib/formatters";
+import { formatDateTime } from "@/utils/formatter";
+
 
 interface DateCellProps {
   date?: string | Date;
