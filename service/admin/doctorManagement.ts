@@ -35,7 +35,6 @@ export const createDoctor = async (_previewState: any, formData: FormData) => {
         if (formData.get("file")) {
             newFormData.append("file", formData.get("file") as Blob)
         }
-        console.log(newFormData)
         const response = await serverFetch.post("/user/create-doctor", {
             body: newFormData
         })
