@@ -1,5 +1,4 @@
 import { getDefaultDashboardRoute, UserRole } from "@/utils/auth-utils";
-import { boolean } from "zod";
 
 interface NavItem {
   name: string;

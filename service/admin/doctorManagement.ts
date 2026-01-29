@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+"use server"
 import { zodValidate } from "@/error/zodValidate";
 import { serverFetch } from "@/utils/server-fetch"
 import { createDoctorZodSchema } from "@/validation/zod/admin/doctor.validation";
 
-export const createDoctor = async (file: any, _previewState: any, formData: FormData) => {
+export const createDoctor = async (_previewState: any, formData: FormData) => {
     try {
         const payload = {
             password: formData.get("password"),
@@ -11,13 +12,12 @@ export const createDoctor = async (file: any, _previewState: any, formData: Form
             {
                 email: formData.get("email"),
                 name: formData.get("name"),
-                // profilePhoto: z.string().optional(),
                 address: formData.get("address"),
                 contactNumber: formData.get("contactNumber"),
                 registrationNumber: formData.get("registrationNumber"),
-                experience: formData.get("experience"),
+                experience: Number(formData.get("experience")),
                 gender: formData.get("gender"),
-                appointmentFee: formData.get("appointmentFee"),
+                appointmentFee: Number(formData.get("appointmentFee")),
                 qualification: formData.get("qualification"),
                 currentWorkingPlace: formData.get("currentWorkingPlace"),
                 designation: formData.get("designation"),
@@ -29,14 +29,13 @@ export const createDoctor = async (file: any, _previewState: any, formData: Form
         }
 
         const validatedPayload = zodValidate(payload, createDoctorZodSchema).data;
-        console.log(validatedPayload)
         const newFormData = new FormData()
         newFormData.append("data", JSON.stringify(validatedPayload))
 
-        if (file) {
-            newFormData.append("file", file as Blob)
+        if (formData.get("file")) {
+            newFormData.append("file", formData.get("file") as Blob)
         }
-        // console.log(newFormData)
+        console.log(newFormData)
         const response = await serverFetch.post("/user/create-doctor", {
             body: newFormData
         })
@@ -56,6 +55,20 @@ export const getAllDoctors = async (queryString?: string) => {
         return await response.json()
     } catch (error) {
         console.log(error, "Doctors Error")
+        return {
+            success: false,
+            message: "Something went wrong"
+        }
+    }
+}
+
+export const deleteSpeciality = async (id: string) => {
+    try {
+        // console.log(id, "this is id")
+        const response = await serverFetch.delete(`/specialties/${id}`)
+        return await response.json()
+    } catch (error) {
+        console.log(error, "Specialities Error")
         return {
             success: false,
             message: "Something went wrong"

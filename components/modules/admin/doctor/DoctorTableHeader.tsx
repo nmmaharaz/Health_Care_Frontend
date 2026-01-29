@@ -5,6 +5,7 @@ import { useState, useTransition } from "react"
 import SpecialitiesCreate from "../specialities/SpecialitiesCreate"
 import RefreshButton from "@/components/shared/Dashboard/RefreshButton"
 import CreateButton from "@/components/shared/Dashboard/CreateButton"
+import CreateDoctor from "./CreateDoctor"
 
 
 export default function DoctorTableHeader() {
@@ -18,16 +19,16 @@ export default function DoctorTableHeader() {
     }
     return (
         <div>
-            <SpecialitiesCreate
+            <CreateDoctor
                 key={isDialogOpen ? 'open' : 'closed'}
                 open={isDialogOpen}
                 onClose={() => setIsDialogOpen(false)}
                 onSuccess={handleSuccess}
-            ></SpecialitiesCreate>
+            ></CreateDoctor>
 
             <div className='flex py-4 border-t border-gray-100 mt-4 justify-between'>
                 <RefreshButton showLabel="Refresh" />
-                <CreateButton label="Create Specialities" onClick={() => setIsDialogOpen(true)}></CreateButton>
+                <CreateButton label="Create Doctor" onClick={() => setIsDialogOpen(true)}></CreateButton>
             </div>
         </div>
     )
