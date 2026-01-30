@@ -1,5 +1,5 @@
 export interface ISpecialty {
-    id: string;
+    id?: string;
     title: string;
     icon: string;
 }
@@ -16,6 +16,7 @@ export interface ICreateButton {
 
 
 export interface ISpecialitiesCreateProps {
+    specialities?:ISpecialty[],
     open: boolean,
     onClose: () => void,
     onSuccess: () => void

@@ -6,7 +6,7 @@ import { toast } from "sonner"
 import DeleteConfirmationDialog from "@/components/shared/Dashboard/DeleteConfirmationDialog"
 import { doctorsColumns } from "./DoctorColumn"
 import { IDoctor, IDoctorProps } from "@/types/admin/doctor.interface"
-import { deleteSpeciality } from "@/service/admin/specialitiesManagement"
+import { deleteDoctor } from "@/service/admin/doctorManagement"
 
 export default function DoctorTable({ doctor }: IDoctorProps) {
     const router = useRouter();
@@ -27,7 +27,7 @@ export default function DoctorTable({ doctor }: IDoctorProps) {
     const confirmDelete = async () => {
         if (!deletingDoctor) return;
         setIsDeletingDialog(true);
-        const result = await deleteSpeciality(deletingDoctor.id as string);
+        const result = await deleteDoctor(deletingDoctor.id as string);
         setIsDeletingDialog(false);
         if (result.success) {
             toast.success(result.message || "Speciality deleted successfully");

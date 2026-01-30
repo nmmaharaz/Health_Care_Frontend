@@ -61,10 +61,10 @@ export const getAllDoctors = async (queryString?: string) => {
     }
 }
 
-export const deleteSpeciality = async (id: string) => {
+export const deleteDoctor = async (id: string) => {
     try {
         // console.log(id, "this is id")
-        const response = await serverFetch.delete(`/specialties/${id}`)
+        const response = await serverFetch.delete(`/doctor/soft/${id}`)
         return await response.json()
     } catch (error) {
         console.log(error, "Specialities Error")

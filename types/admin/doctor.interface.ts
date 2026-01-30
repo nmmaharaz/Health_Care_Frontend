@@ -1,3 +1,5 @@
+import { ISpecialty } from "./secialities.interface";
+
 export interface IDoctor {
     id?: string;
     name: string;
@@ -27,5 +29,5 @@ export interface IDoctor {
 }
 
 export interface IDoctorProps {
-    doctor: IDoctor[]
+    doctor: IDoctor[],
 }

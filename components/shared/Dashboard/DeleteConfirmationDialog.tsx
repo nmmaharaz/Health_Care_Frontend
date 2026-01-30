@@ -14,7 +14,7 @@ interface IConfirmationDialog {
 export default function DeleteConfirmationDialog({ open, onOpenChange, onConfirm, description, title, isDeleting }: IConfirmationDialog) {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent>
+      <AlertDialogContent className='data-[size=default]:sm:max-w-lg'>
         <div className="flex flex-col gap-2 max-sm:items-center sm:flex-row sm:gap-4">
           <div
             aria-hidden="true"

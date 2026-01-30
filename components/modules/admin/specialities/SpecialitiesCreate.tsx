@@ -61,7 +61,7 @@ export default function SpecialitiesCreate({ open, onClose, onSuccess }: ISpecia
     return (
         <AlertDialog open={open} onOpenChange={onClose}>
             {/* <AlertDialogTitle>Create Speciality</AlertDialogTitle> */}
-            <AlertDialogContent className="max-w-lg">
+            <AlertDialogContent className="data-[size=default]:sm:max-w-lg">
                 <AlertDialogHeader>
                     <AlertDialogTitle>Create Speciality</AlertDialogTitle>
                 </AlertDialogHeader>

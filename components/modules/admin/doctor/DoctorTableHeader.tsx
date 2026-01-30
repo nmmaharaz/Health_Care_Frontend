@@ -2,13 +2,13 @@
 
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
-import SpecialitiesCreate from "../specialities/SpecialitiesCreate"
 import RefreshButton from "@/components/shared/Dashboard/RefreshButton"
 import CreateButton from "@/components/shared/Dashboard/CreateButton"
 import CreateDoctor from "./CreateDoctor"
+import { ISpecialitiesProps } from "@/types/admin/secialities.interface"
 
 
-export default function DoctorTableHeader() {
+export default function DoctorTableHeader({specialities}: ISpecialitiesProps) {
     const router = useRouter()
     const [, startTransition] = useTransition()
     const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -20,6 +20,7 @@ export default function DoctorTableHeader() {
     return (
         <div>
             <CreateDoctor
+                specialities={specialities}
                 key={isDialogOpen ? 'open' : 'closed'}
                 open={isDialogOpen}
                 onClose={() => setIsDialogOpen(false)}
