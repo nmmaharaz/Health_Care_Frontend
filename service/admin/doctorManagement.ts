@@ -6,6 +6,7 @@ import { createDoctorZodSchema } from "@/validation/zod/admin/doctor.validation"
 
 export const createDoctor = async (_previewState: any, formData: FormData) => {
     try {
+        const specialtiesData = formData.get("specialities") as string
         const payload = {
             password: formData.get("password"),
             doctor:
@@ -21,6 +22,7 @@ export const createDoctor = async (_previewState: any, formData: FormData) => {
                 qualification: formData.get("qualification"),
                 currentWorkingPlace: formData.get("currentWorkingPlace"),
                 designation: formData.get("designation"),
+                specialties: JSON.parse(specialtiesData)
             }
         }
 
@@ -63,7 +65,6 @@ export const getAllDoctors = async (queryString?: string) => {
 
 export const deleteDoctor = async (id: string) => {
     try {
-        // console.log(id, "this is id")
         const response = await serverFetch.delete(`/doctor/soft/${id}`)
         return await response.json()
     } catch (error) {

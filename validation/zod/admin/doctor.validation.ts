@@ -17,6 +17,14 @@ export const createDoctorZodSchema = z.object({
             qualification: z.string(),
             currentWorkingPlace: z.string(),
             designation: z.string(),
+            specialties: z
+                .array(
+                    z.string()
+                )
+                .min(1, {
+                    message: "At least one specialty is required",
+                })
+                .optional()
         }
     )
 })

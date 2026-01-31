@@ -7,6 +7,7 @@ import DeleteConfirmationDialog from "@/components/shared/Dashboard/DeleteConfir
 import { doctorsColumns } from "./DoctorColumn"
 import { IDoctor, IDoctorProps } from "@/types/admin/doctor.interface"
 import { deleteDoctor } from "@/service/admin/doctorManagement"
+import DoctorViewDetailDialog from "./DoctorViewDetailDialog"
 
 export default function DoctorTable({ doctor }: IDoctorProps) {
     const router = useRouter();
@@ -14,10 +15,21 @@ export default function DoctorTable({ doctor }: IDoctorProps) {
     const [deletingDoctor, setDeletingDoctor] =
         useState<IDoctor | null>(null);
     const [isDeletingDialog, setIsDeletingDialog] = useState(false);
+    const [viewingDoctor, setViewingDoctor] = useState<IDoctor | null>(null);
+    const [editingDoctor, setEditingDoctor] = useState<IDoctor | null>(null);
+
     const handleRefresh = () => {
         startTransition(() => {
             router.refresh();
         });
+    };
+
+    const handleView = (doctor: IDoctor) => {
+        setViewingDoctor(doctor);
+    };
+
+    const handleEdit = (doctor: IDoctor) => {
+        setEditingDoctor(doctor);
     };
 
     const handleDelete = (doctor: IDoctor) => {
@@ -44,9 +56,30 @@ export default function DoctorTable({ doctor }: IDoctorProps) {
                 data={doctor}
                 columns={doctorsColumns}
                 getRowKey={(doctor) => doctor.id as string}
+                onView={handleView}
                 onDelete={handleDelete}
                 emptyMessage="No Specilities Found">
             </ManagementTable>
+{/* 
+            <DoctorFormDialog
+                open={!!editingDoctor}
+                onClose={() => setEditingDoctor(null)}
+                doctor={editingDoctor!}
+                specialities={specialities}
+                onSuccess={() => {
+                    setEditingDoctor(null);
+                    handleRefresh();
+                }}
+            /> */}
+
+            {/* View Doctor Detail Dialog */}
+            <DoctorViewDetailDialog
+                open={!!viewingDoctor}
+                onClose={() => setViewingDoctor(null)}
+                doctor={viewingDoctor}
+            />
+
+
 
             <DeleteConfirmationDialog
                 open={!!deletingDoctor}

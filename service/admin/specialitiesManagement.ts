@@ -6,11 +6,6 @@ import { createSpecialityZodSchema } from "@/validation/zod/admin/specialties.va
 
 export const createSpecialities = async (file:any, _previewState: any, formData: FormData) => {
     try {
-        // const text = {
-        //     title: formData.get("title") as string,
-        //     file: formData.get("demo")
-        // }
-        // console.log(text, "text")
         const payload = {
             title: formData.get("title") as string
         }

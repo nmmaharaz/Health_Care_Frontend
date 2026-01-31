@@ -6,7 +6,6 @@ import { useActionState, useState } from 'react';
 const RegisterForm = () => {
   const [success, setSuccess] = useState(true);
   const [state, formAction, isPending] = useActionState(regiterPatient, null)
-  console.log(state, "state");
   return (
     <section className="max-w-7xl mx-auto py-10 px-6">
       <div className="bg-white rounded-[40px] drop-shadow-sm p-8 md:p-14 flex flex-col lg:flex-row gap-16">
@@ -46,7 +45,7 @@ const RegisterForm = () => {
             />
             <div className="md:col-span-2 mt-4">
               <button className="bg-linear-to-r from-[#4338ca] to-[#4f6ad4f1] text-white font-bold py-4 px-10 rounded-full hover:bg-[#3b4bbd] transition-colors shadow-lg">
-                Book An Appointment
+                {isPending ? "Loading..": "Register"}
               </button>
             </div>
 

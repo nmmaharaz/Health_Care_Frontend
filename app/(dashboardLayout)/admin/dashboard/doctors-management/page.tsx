@@ -8,6 +8,7 @@ import { Suspense } from 'react'
 
 export default async function DoctorManagementPage() {
   const { data } = await getAllDoctors()
+  console.log(data.data[0], "Datafgdsfsdf")
   const specialities = await getAllSpecialities()
 
   return (

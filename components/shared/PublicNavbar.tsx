@@ -12,27 +12,6 @@ import { UserRole } from '@/utils/auth-utils';
 import { navItems } from '@/app/constant/NavbarItem';
 
 export default function PublicNavbar({ user }: { user: IUserInfo }) {
-
-  // const totalpage = 20
-  // const currentpage = 7
-
-  // const data = Array.from({ length: Math.min(5, totalpage) }, (v, k) => {
-  //   let pathname
-  //   if (currentpage <= 5) {
-  //     pathname = k + 1
-  //   } else if (currentpage <= 3) {
-  //     pathname = k + 1
-  //   } else if (currentpage >= totalpage - 2) {
-  //     pathname = totalpage - 4 + k;
-  //   } else {
-  //     pathname = currentpage - 2 + k;
-  //   }
-  //   console.log(k)
-  //   console.log(pathname, "pathname")
-  // })
-
-  // console.log(data, "data")
-
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
