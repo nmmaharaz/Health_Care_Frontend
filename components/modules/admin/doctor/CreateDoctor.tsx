@@ -1,25 +1,45 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import MultipleSelector from "@/components/ui/multiselect";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import InputFieldError from "@/error/InputFieldError";
 import { createDoctor } from "@/service/admin/doctorManagement";
-import { ISpecialitiesCreateProps, ISpecialty } from "@/types/admin/secialities.interface";
+import { IDoctorFormDialogProps } from "@/types/admin/doctor.interface";
+import { ISpecialty } from "@/types/admin/secialities.interface";
+// import Image from "next/image";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 
-export default function CreateDoctor({ specialities, open, onClose, onSuccess }: ISpecialitiesCreateProps) {
-    const [specialitiesData, setSpecialitiesData] = useState<string[]>([]);
+export default function CreateDoctor({ specialities, open, onClose, doctor, onSuccess }: IDoctorFormDialogProps) {
+    const [specialitiesData, setSpecialitiesData] = useState<string[]>(() => {
+        if (doctor?.doctorSpecialties) {
+            return doctor.doctorSpecialties
+                .map((s) => s.specialities?.title)
+                .filter(Boolean) as string[];
+        }
+        return [];
+    });
+
+    console.log(specialitiesData, "specialitiesData")
+
     const [state, formAction, pending] = useActionState(createDoctor, null)
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const isEdit = !!doctor;
 
     const data = specialities?.map((specialty: ISpecialty) => ({
         label: specialty.title,
         value: specialty.title
     }))
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        setSelectedFile(file || null);
+    };
 
     useEffect(() => {
         if (!state) return
@@ -33,120 +53,260 @@ export default function CreateDoctor({ specialities, open, onClose, onSuccess }:
             toast.error(state.message)
         }
     }, [state, onSuccess, onClose])
-
-    // useEffect(() => {
-    //     if (state && state?.success) {
-    //         toast.success(state.message);
-    //         onSuccess();
-    //         onClose();
-    //     } else if (state && !state.success) {
-    //         toast.error(state.message);
-    //     }
-    // },  [state, onSuccess, onClose])
+    
     return (
         <Dialog open={open} onOpenChange={onClose}>
             <DialogContent className="overflow-hidden sm:max-w-2xl">
-                <div className="max-h-[90vh] overflow-y-auto relative">
-                <DialogHeader className="pb-4">
-                    <DialogTitle>Doctor Profile</DialogTitle>
-                </DialogHeader>
-                    <div>
+                <div>
+                    <DialogHeader className="pb-4">
+                        <DialogTitle>Doctor Profile</DialogTitle>
+                    </DialogHeader>
+                    <div className="max-h-[85vh] overflow-y-auto relative">
                         <form
                             action={formAction}
                             className="grid grid-cols-1 px-2 md:grid-cols-2 gap-3"
                         >
                             <div className="md:col-span-2">
-                                <Label className="text-gray-700">Name</Label>
-                                <Input required autoComplete="on" name="name" />
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Name</FieldLabel>
+                                    <Input required
+                                        autoComplete="on"
+                                        name="name"
+                                        defaultValue={
+                                            state?.formData?.name || (isEdit ? doctor?.name : "")
+                                        }
+                                    />
+                                    <InputFieldError state={state} field="name"></InputFieldError>
+                                </Field>
                             </div>
 
                             <div className="md:col-span-2">
-                                <Label className="text-gray-700">Email</Label>
-                                <Input required autoComplete="on" name="email" />
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Email</FieldLabel>
+                                    <Input required
+                                        autoComplete="on"
+                                        name="email"
+                                        defaultValue={
+                                            state?.formData?.email || (isEdit ? doctor?.email : "")
+                                        }
+                                        disabled={isEdit}
+                                    />
+                                    <InputFieldError state={state} field="email"></InputFieldError>
+                                </Field>
+                            </div>
+                            {
+                                !isEdit && (
+
+                                    <div>
+                                        <Field>
+                                            <FieldLabel className="text-gray-700">Password</FieldLabel>
+                                            <Input required
+                                                autoComplete="on"
+                                                type="password"
+                                                name="password"
+                                                defaultValue={
+                                                    state?.formData?.password || ""
+                                                }
+                                                disabled={isEdit}
+                                            />
+                                            <InputFieldError state={state} field="password"></InputFieldError>
+                                        </Field>
+                                    </div>
+                                )
+                            }
+
+                            {
+                                !isEdit && (
+                                    <div>
+                                        <Field>
+                                            <FieldLabel className="text-gray-700">Profile Photo</FieldLabel>
+                                            <Input required
+                                                autoComplete="on"
+                                                type="file" name="file"
+                                                accept="image/*"
+                                                onChange={handleFileChange}
+                                                defaultValue={
+                                                    state?.formData?.file || ""
+                                                }
+                                            />
+                                        </Field>
+                                    </div>
+
+                                )
+                            }
+                            {/* {!isEdit && (
+                                <Field>
+                                    <FieldLabel htmlFor="file">Profile Photo</FieldLabel>
+                                    {selectedFile && (
+                                        <Image
+                                            //get from state if available
+                                            src={
+                                                typeof selectedFile === "string"
+                                                    ? selectedFile
+                                                    : URL.createObjectURL(selectedFile)
+                                            }
+                                            alt="Profile Photo Preview"
+                                            width={50}
+                                            height={50}
+                                            className="mb-2 w-5 h-5 overflow-hidden rounded-full"
+                                        />
+                                    )}
+                                    <Input
+                                        id="file"
+                                        name="file"
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleFileChange}
+                                    />
+                                    <p className="text-xs text-gray-500 mt-1">
+                                        Upload a profile photo for the doctor
+                                    </p>
+                                    <InputFieldError state={state} field="profilePhoto" />
+                                </Field>
+                            )} */}
+
+                            <div>
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Contact Number</FieldLabel>
+                                    <Input required autoComplete="on" name="contactNumber"
+                                        defaultValue={
+                                            state?.formData?.contactNumber || (isEdit ? doctor?.contactNumber : "")
+                                        }
+                                    />
+                                    <InputFieldError state={state} field="contactNumber"></InputFieldError>
+                                </Field>
                             </div>
 
                             <div>
-                                <Label className="text-gray-700">Password</Label>
-                                <Input required autoComplete="on" type="password" name="password" />
-                            </div>
-
-                            <div>
-                                <Label className="text-gray-700">Profile Photo</Label>
-                                <Input required autoComplete="on" type="file" name="file" accept="image/*" />
-                            </div>
-
-                            <div>
-                                <Label className="text-gray-700">Contact Number</Label>
-                                <Input required autoComplete="on" name="contactNumber" />
-                            </div>
-
-                            <div>
-                                <Label className="text-gray-700">Gender</Label>
-                                <Select defaultValue="MALE" name="gender">
-                                    <SelectTrigger className="w-full">
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent
-                                        position={"popper"}
-                                    >
-                                        <SelectGroup>
-                                            <SelectItem value="MALE">Male</SelectItem>
-                                            <SelectItem value="FEMALE">Female</SelectItem>
-                                        </SelectGroup>
-                                    </SelectContent>
-                                </Select>
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Gender</FieldLabel>
+                                    <Select
+                                        defaultValue={
+                                            state?.formData?.gender || (isEdit ? doctor?.gender : "")
+                                        }
+                                        name="gender">
+                                        <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Select Gender" />
+                                        </SelectTrigger>
+                                        <SelectContent
+                                            position={"popper"}
+                                        >
+                                            <SelectGroup>
+                                                <SelectItem value="MALE">Male</SelectItem>
+                                                <SelectItem value="FEMALE">Female</SelectItem>
+                                            </SelectGroup>
+                                        </SelectContent>
+                                    </Select>
+                                    <InputFieldError state={state} field="gender"></InputFieldError>
+                                </Field>
                             </div>
                             <div className="md:col-span-2">
-                                <Label className="text-gray-700">Address</Label>
-                                <Textarea name="address" />
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Address</FieldLabel>
+                                    <Textarea name="address"
+                                        defaultValue={
+                                            state?.formData?.address || (isEdit ? doctor?.address : "")
+                                        }
+                                    />
+                                    <InputFieldError state={state} field="address"></InputFieldError>
+                                </Field>
                             </div>
 
                             <div>
-                                <Label className="text-gray-700">Registration Number</Label>
-                                <Input required autoComplete="on" name="registrationNumber" />
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Registration Number</FieldLabel>
+                                    <Input required autoComplete="on" name="registrationNumber"
+                                        defaultValue={
+                                            state?.formData?.registrationNumber || (isEdit ? doctor?.registrationNumber : "")
+                                        }
+                                    />
+                                    <InputFieldError state={state} field="registrationNumber"></InputFieldError>
+                                </Field>
                             </div>
 
                             <div>
-                                <Label className="text-gray-700">Experience</Label>
-                                <Input required autoComplete="on" name="experience" type="number" />
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Experience</FieldLabel>
+                                    <Input required autoComplete="on" name="experience" type="number"
+                                        defaultValue={
+                                            state?.formData?.experience || (isEdit ? doctor?.experience : "")
+                                        }
+                                    />
+                                    <InputFieldError state={state} field="experience"></InputFieldError></Field>
                             </div>
 
                             <div>
-                                <Label className="text-gray-700">Appointment Fee</Label>
-                                <Input required autoComplete="on" name="appointmentFee" type="number" />
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Appointment Fee</FieldLabel>
+                                    <Input required autoComplete="on" name="appointmentFee" type="number"
+                                        defaultValue={
+                                            state?.formData?.appointmentFee || (isEdit ? doctor?.appointmentFee : "")
+                                        }
+                                    />
+                                    <InputFieldError state={state} field="appointmentFee"></InputFieldError>
+                                </Field>
                             </div>
 
                             <div>
-                                <Label className="text-gray-700">Qualification</Label>
-                                <Input required autoComplete="on" name="qualification" />
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Qualification</FieldLabel>
+                                    <Input required autoComplete="on" name="qualification"
+                                        defaultValue={
+                                            state?.formData?.qualification || (isEdit ? doctor?.qualification : "")
+                                        }
+                                    />
+                                    <InputFieldError state={state} field="qualification"></InputFieldError>
+                                </Field>
                             </div>
                             <div className="md:col-span-2">
-                                <Label className="text-gray-700">Specialities</Label>
-                                <MultipleSelector
-                                    commandProps={{
-                                        label: "Select Specialities",
-                                    }}
-                                    defaultOptions={data}
-                                    onChange={(items) => {
-                                        setSpecialitiesData(items.map(item => item.value))
-                                    }}
-                                    emptyIndicator={<p className="text-center text-sm">No results found</p>}
-                                    placeholder="Select Specialities"
-                                />
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Specialities</FieldLabel>
+                                    <MultipleSelector
+                                        value={specialitiesData.map((sp) => ({
+                                            label: sp,
+                                            value: sp,
+                                        }))}
+                                        commandProps={{
+                                            label: "Select Specialities",
+                                        }}
+
+                                        defaultOptions={data}
+                                        onChange={(items) => {
+                                            setSpecialitiesData(items.map(item => item.value))
+                                        }}
+                                        emptyIndicator={<p className="text-center text-sm">No results found</p>}
+                                        placeholder="Select Specialities"
+                                    />
+                                    <InputFieldError state={state} field="specialities"></InputFieldError>
+                                </Field>
                             </div>
-                            <input
+                            <Input
                                 type="hidden"
                                 name="specialities"
                                 value={JSON.stringify(specialitiesData)}
                             />
 
                             <div>
-                                <Label className="text-gray-700">Designation</Label>
-                                <Input required autoComplete="on" name="designation" />
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Designation</FieldLabel>
+                                    <Input required autoComplete="on" name="designation"
+                                        defaultValue={
+                                            state?.formData?.designation || (isEdit ? doctor?.designation : "")
+                                        }
+                                    />
+                                    <InputFieldError state={state} field="designation"></InputFieldError>
+                                </Field>
                             </div>
                             <div>
-                                <Label className="text-gray-700">Current Working Place</Label>
-                                <Input required autoComplete="on" name="currentWorkingPlace" />
+                                <Field>
+                                    <FieldLabel className="text-gray-700">Current Working Place</FieldLabel>
+                                    <Input required autoComplete="on" name="currentWorkingPlace"
+                                        defaultValue={
+                                            state?.formData?.currentWorkingPlace || (isEdit ? doctor?.currentWorkingPlace : "")
+                                        }
+                                    />
+                                    <InputFieldError state={state} field="currentWorkingPlace"></InputFieldError>
+                                </Field>
                             </div>
 
                             {state?.error && (

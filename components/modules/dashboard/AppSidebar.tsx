@@ -37,7 +37,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                     </div>
                   </a>
                 </SidebarMenuButton>
-                <SidebarTrigger className='md:hidden'>
+                <SidebarTrigger className='lg:hidden'>
                   <X className="w-5 h-5"/>
                 </SidebarTrigger>
 

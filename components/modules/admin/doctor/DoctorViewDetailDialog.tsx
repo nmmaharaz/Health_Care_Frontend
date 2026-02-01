@@ -39,7 +39,7 @@ const DoctorViewDetailDialog = ({
   }
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="min-w-5xl max-h-[90vh] flex flex-col p-0">
+      <DialogContent className="min-w-5xl max-h-[90vh] overflow-hidden flex flex-col p-0">
         <DialogHeader className="px-6 pt-6 pb-4">
           <DialogTitle>Doctor Profile</DialogTitle>
         </DialogHeader>
@@ -158,7 +158,7 @@ const DoctorViewDetailDialog = ({
                           variant="outline"
                           className="px-4 py-2 text-sm"
                         >
-                          {specialty.specialties?.title || "Unknown"}
+                          {specialty?.specialities?.title || "Unknown"}
                         </Badge>
                       ))}
                     </div>

@@ -12,10 +12,10 @@ export const doctorsColumns: Column<IDoctor>[] = [
   {
     header: "Doctor",
     accessor: (doctor) => (
-       <UserInfoCell
+      <UserInfoCell
         name={doctor.name}
         email={doctor.email}
-        photo={doctor.profilePhoto}
+        photo={doctor.profilePhoto as string}
       />
     ),
   },
@@ -24,14 +24,15 @@ export const doctorsColumns: Column<IDoctor>[] = [
     accessor: (doctor) => (
       <div className="flex flex-wrap gap-1">
         {doctor.doctorSpecialties && doctor.doctorSpecialties.length > 0 ? (
-          doctor.doctorSpecialties.map((specialty, index) => (
-            <span
-              key={specialty.specialties?.id || index}
+          doctor.doctorSpecialties.map((specialty, index) => {
+            return <span
+              key={specialty.specialities?.id || index}
               className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
             >
-              {specialty.specialties?.title || "N/A"}
+              {/* {specialty?.specialties?.title || "N/A"} */}
+              {specialty?.specialities?.title || "N/A"}
             </span>
-          ))
+          })
         ) : (
           <span className="text-xs text-gray-500">No specialties</span>
         )}

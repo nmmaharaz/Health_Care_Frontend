@@ -8,8 +8,10 @@ import { doctorsColumns } from "./DoctorColumn"
 import { IDoctor, IDoctorProps } from "@/types/admin/doctor.interface"
 import { deleteDoctor } from "@/service/admin/doctorManagement"
 import DoctorViewDetailDialog from "./DoctorViewDetailDialog"
+import DoctorEditInfo from "./DoctorEditInfo"
+import CreateDoctor from "./CreateDoctor"
 
-export default function DoctorTable({ doctor }: IDoctorProps) {
+export default function DoctorTable({ doctor, specialities }: IDoctorProps) {
     const router = useRouter();
     const [, startTransition] = useTransition();
     const [deletingDoctor, setDeletingDoctor] =
@@ -56,12 +58,24 @@ export default function DoctorTable({ doctor }: IDoctorProps) {
                 data={doctor}
                 columns={doctorsColumns}
                 getRowKey={(doctor) => doctor.id as string}
+                onEdit={handleEdit}
                 onView={handleView}
                 onDelete={handleDelete}
                 emptyMessage="No Specilities Found">
             </ManagementTable>
-{/* 
-            <DoctorFormDialog
+
+            <CreateDoctor
+                 open={!!editingDoctor}
+                onClose={() => setEditingDoctor(null)}
+                doctor={editingDoctor!}
+                specialities={specialities}
+                onSuccess={() => {
+                    setEditingDoctor(null);
+                    handleRefresh();
+                }}
+            ></CreateDoctor>
+
+            {/* <DoctorEditInfo
                 open={!!editingDoctor}
                 onClose={() => setEditingDoctor(null)}
                 doctor={editingDoctor!}

@@ -10,10 +10,10 @@ export default function DashbordLayoutStyle({ children }: { children: React.Reac
         <div>
             <SidebarProvider>
                 <AppSidebar />
-                <SidebarInset className="" >
+                <SidebarInset>
                     <header className=" shrink-0 py-1 px-4 md:px-4 lg:px-8 border-b border-gray-100 bg-white">
                         <div className="flex items-center justify-between gap-2">
-                            <SidebarTrigger className='md:hidden'><Menu /></SidebarTrigger>
+                            <SidebarTrigger className='lg:hidden'><Menu /></SidebarTrigger>
                             <SearchInputFeild></SearchInputFeild>
                             <div className="flex items-center justify-between px-4 cursor-pointer py-3 gap-3 rounded-lg w-fit">
                                 <UserProfileDropdown></UserProfileDropdown>

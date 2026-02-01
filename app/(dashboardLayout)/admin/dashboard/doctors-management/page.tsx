@@ -4,11 +4,17 @@ import DashboardHeader from '@/components/shared/Dashboard/DashboardHeader'
 import { TableSkeleton } from '@/components/shared/Dashboard/TableSkeleton'
 import { getAllDoctors } from '@/service/admin/doctorManagement'
 import { getAllSpecialities } from '@/service/admin/specialitiesManagement'
+import { queryStringFormatter } from '@/utils/formatter'
 import { Suspense } from 'react'
 
-export default async function DoctorManagementPage() {
-  const { data } = await getAllDoctors()
-  console.log(data.data[0], "Datafgdsfsdf")
+export default async function DoctorManagementPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const searchParamsObj = await searchParams;
+  const queryString = queryStringFormatter(searchParamsObj)
+  const { data }= await getAllDoctors(queryString)
   const specialities = await getAllSpecialities()
 
   return (
@@ -16,7 +22,7 @@ export default async function DoctorManagementPage() {
       <DashboardHeader title="Doctor Management" subtitle="Manage doctor information and details"></DashboardHeader>
       <DoctorTableHeader specialities={specialities.data}></DoctorTableHeader>
       <Suspense fallback={<TableSkeleton columns={2} rows={10}></TableSkeleton>}>
-        <DoctorTable doctor={data.data}></DoctorTable>
+        <DoctorTable doctor={data.data} specialities={specialities.data}></DoctorTable>
       </Suspense>
     </div>
   )

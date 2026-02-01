@@ -1,7 +1,7 @@
 import { useTransition } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SelectFilterProps } from "@/types/shared.interface";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 
 export default function SelectFilter({

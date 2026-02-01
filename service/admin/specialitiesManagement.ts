@@ -51,7 +51,6 @@ export const getAllSpecialities = async (queryString?: string) => {
 
 export const deleteSpeciality = async (id: string) => {
     try {
-        // console.log(id, "this is id")
         const response = await serverFetch.delete(`/specialties/${id}`)
         return await response.json()
     } catch (error) {

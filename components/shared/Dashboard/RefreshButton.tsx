@@ -12,17 +12,19 @@ export default function RefreshButton({ showLabel }: RefreshButtonProps) {
             router.refresh()
         })
     }
-    
+
     return (
-        <button
-            className="flex items-center bg-linear-to-r from-[#4338ca] to-[#4f6ad4f1] px-4 py-2 text-sm font-semibold rounded-md text-white hover:from-[#3a2fac] hover:to-[#4f69d0f1] hover:transition-transform"
-            onClick={handleRefresh}
-        >
-            <RefreshCcw
-                className={`h-4 w-4 ${isPending ? "animate-spin" : ""} ${showLabel ? "mr-2" : ""
-                    }`}
-            />
-            {showLabel}
-        </button>
+        <div>
+            <button
+                className="flex items-center bg-linear-to-r from-[#4338ca] to-[#4f6ad4f1] px-4 py-2 text-sm font-semibold rounded-md text-white hover:from-[#3a2fac] hover:to-[#4f69d0f1] hover:transition-transform"
+                onClick={handleRefresh}
+            >
+                <RefreshCcw
+                    className={`h-4 w-4 ${isPending ? "animate-spin" : ""} ${showLabel ? "mr-2" : ""
+                        }`}
+                />
+                {showLabel}
+            </button>
+        </div>
     )
 }

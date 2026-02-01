@@ -21,3 +21,4 @@ export interface ISpecialitiesCreateProps {
     onClose: () => void,
     onSuccess: () => void
 }
+

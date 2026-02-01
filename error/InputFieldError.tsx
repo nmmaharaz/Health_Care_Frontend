@@ -1,3 +1,4 @@
+import { FieldDescription } from "@/components/ui/field";
 import { getFieldError, IInputErrorState } from "./formError";
 
 interface InputFieldErrorProps {
@@ -8,9 +9,9 @@ interface InputFieldErrorProps {
 const InputFieldError = ({ field, state }: InputFieldErrorProps) => {
   if (getFieldError(field, state)) {
     return (
-      <label className="text-red-600">
+      <FieldDescription className="text-red-600">
         {getFieldError(field, state)}
-      </label>
+      </FieldDescription>
     )
   }
 }

@@ -1,4 +1,4 @@
- 
+
 export interface IInputErrorState {
   success: boolean;
   errors: {
@@ -6,16 +6,13 @@ export interface IInputErrorState {
     message: string;
   }[];
 }
- 
- export const getFieldError = (fieldName: string, state: IInputErrorState) => {
-    if (state && state.errors) {
-      const error = state.errors.find((err) => err.field === fieldName);
-      if (error) {
-        return error.message;
-      } else {
-        return null;
-      }
-    } else {
-      return null;
-    }
-  };
+
+export const getFieldError = (fieldName: string, state: IInputErrorState) => {
+  if (state && state.errors) {
+    const error = state.errors.find((err) => err.field === fieldName);
+    console.log(error?.message, "message")
+    return error ? error.message : null
+  } else {
+    return null;
+  }
+};

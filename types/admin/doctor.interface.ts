@@ -1,3 +1,5 @@
+import { ISpecialty } from "./secialities.interface";
+
 export interface IDoctor {
     id?: string;
     name: string;
@@ -21,7 +23,7 @@ export interface IDoctor {
     updatedAt?: string;
     doctorSpecialties?: Array<{
         specialitiesId: string;
-        specialties?: {
+        specialities?: {
             id: string;
             title: string;
             icon?: string;
@@ -31,4 +33,13 @@ export interface IDoctor {
 
 export interface IDoctorProps {
     doctor: IDoctor[],
+    specialities:ISpecialty[]
+}
+
+export interface IDoctorFormDialogProps {
+  open: boolean;
+  onClose: () => void;
+  onSuccess: () => void;
+  doctor?: IDoctor;
+  specialities?: ISpecialty[];
 }
