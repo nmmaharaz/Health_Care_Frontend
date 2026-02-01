@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
@@ -28,8 +29,20 @@ const TablePagination = ({ currentPage, totalPages }: TablePaginationProps) => {
     return null;
   }
 
+  const changeLimit = (newLimit: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("limit", newLimit);
+    params.set("page", "1"); // Reset to first page when changing limit
+
+    startTransition(() => {
+      router.push(`?${params.toString()}`);
+    });
+  };
+
+  const currentLimit = searchParams.get("limit") || "10";
+
   return (
-    <div className="flex items-center justify-center gap-2">
+    <div className="flex items-center mb-8 justify-center gap-2">
       <Button
         variant="outline"
         size="sm"
@@ -56,11 +69,11 @@ const TablePagination = ({ currentPage, totalPages }: TablePaginationProps) => {
           return (
             <Button
               key={pageNumber}
-              variant={pageNumber === currentPage ? "default" : "outline"}
+              // variant={pageNumber === currentPage ? "default" : "outline"}
               size="sm"
               onClick={() => navigateToPage(pageNumber)}
               disabled={isPending}
-              className="w-10"
+              className={`w-10  ${pageNumber === currentPage ?"bg-linear-to-r from-[#4338ca] to-[#4f6ad4f1] text-white":"bg-white border border-[#e5e3fa] text-black" }`}
             >
               {pageNumber}
             </Button>
@@ -82,6 +95,28 @@ const TablePagination = ({ currentPage, totalPages }: TablePaginationProps) => {
         {/* Page 9 of 20 */}
         Page {currentPage} of {totalPages}
       </span>
+
+      {/* Items per page selector */}
+      <div className="flex items-center gap-2">
+        <span className="text-sm text-muted-foreground">Items per page:</span>
+        <Select
+          value={currentLimit}
+          onValueChange={changeLimit}
+          disabled={isPending}
+        >
+          <SelectTrigger className="w-17.5 h-8">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent className="*:text-black">
+            <SelectItem value="1">1</SelectItem>
+            <SelectItem value="5">5</SelectItem>
+            <SelectItem value="10">10</SelectItem>
+            <SelectItem value="20">20</SelectItem>
+            <SelectItem value="50">50</SelectItem>
+            <SelectItem value="100">100</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </div>
   );
 };

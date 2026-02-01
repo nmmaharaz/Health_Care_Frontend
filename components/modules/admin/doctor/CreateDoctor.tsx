@@ -7,29 +7,30 @@ import MultipleSelector from "@/components/ui/multiselect";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import InputFieldError from "@/error/InputFieldError";
-import { createDoctor } from "@/service/admin/doctorManagement";
+import { createDoctor, updateDoctor } from "@/service/admin/doctorManagement";
 import { IDoctorFormDialogProps } from "@/types/admin/doctor.interface";
 import { ISpecialty } from "@/types/admin/secialities.interface";
-// import Image from "next/image";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 
 export default function CreateDoctor({ specialities, open, onClose, doctor, onSuccess }: IDoctorFormDialogProps) {
+    // console.log(doctor?.doctorSpecialties?.specialities, "doctor.doctorSpecialties")
     const [specialitiesData, setSpecialitiesData] = useState<string[]>(() => {
         if (doctor?.doctorSpecialties) {
-            return doctor.doctorSpecialties
-                .map((s) => s.specialities?.title)
-                .filter(Boolean) as string[];
+            return doctor?.doctorSpecialties
+                .map((s) => s.specialities?.title) as string[];
         }
         return [];
     });
-
     console.log(specialitiesData, "specialitiesData")
 
-    const [state, formAction, pending] = useActionState(createDoctor, null)
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const isEdit = !!doctor;
+    const [state, formAction, pending] = useActionState(
+        isEdit ? updateDoctor.bind(null, doctor.id!) : createDoctor,
+        null
+    );
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     const data = specialities?.map((specialty: ISpecialty) => ({
         label: specialty.title,
@@ -53,7 +54,7 @@ export default function CreateDoctor({ specialities, open, onClose, doctor, onSu
             toast.error(state.message)
         }
     }, [state, onSuccess, onClose])
-    
+
     return (
         <Dialog open={open} onOpenChange={onClose}>
             <DialogContent className="overflow-hidden sm:max-w-2xl">
@@ -134,36 +135,6 @@ export default function CreateDoctor({ specialities, open, onClose, doctor, onSu
 
                                 )
                             }
-                            {/* {!isEdit && (
-                                <Field>
-                                    <FieldLabel htmlFor="file">Profile Photo</FieldLabel>
-                                    {selectedFile && (
-                                        <Image
-                                            //get from state if available
-                                            src={
-                                                typeof selectedFile === "string"
-                                                    ? selectedFile
-                                                    : URL.createObjectURL(selectedFile)
-                                            }
-                                            alt="Profile Photo Preview"
-                                            width={50}
-                                            height={50}
-                                            className="mb-2 w-5 h-5 overflow-hidden rounded-full"
-                                        />
-                                    )}
-                                    <Input
-                                        id="file"
-                                        name="file"
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={handleFileChange}
-                                    />
-                                    <p className="text-xs text-gray-500 mt-1">
-                                        Upload a profile photo for the doctor
-                                    </p>
-                                    <InputFieldError state={state} field="profilePhoto" />
-                                </Field>
-                            )} */}
 
                             <div>
                                 <Field>
@@ -318,7 +289,13 @@ export default function CreateDoctor({ specialities, open, onClose, doctor, onSu
                             )}
 
                             <div className="md:col-span-2">
-                                <Button type="submit" className="bg-linear-to-r w-full from-[#4338ca] to-[#4f6ad4f1] hover:bg-linear-to-r hover:from-[#3a2fac] hover:to-[#4f69d0f1]" disabled={pending}>{pending ? "Pending..." : "Register Doctor"}</Button>
+                                <Button type="submit"
+                                    className="bg-linear-to-r w-full from-[#4338ca] to-[#4f6ad4f1] hover:bg-linear-to-r hover:from-[#3a2fac] hover:to-[#4f69d0f1]"
+                                    disabled={pending}>
+                                    {pending ? "Pending..." : isEdit
+                                        ? "Update Doctor"
+                                        : "Create Doctor"}
+                                </Button>
                             </div>
                         </form>
                     </div>

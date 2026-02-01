@@ -41,9 +41,8 @@ export const createDoctor = async (_previewState: any, formData: FormData) => {
             formData: payload,
         }
     }
-    
-    const {password, ...doctorData} = validatedPayload.data 
-    // console.log(password)
+
+    const { password, ...doctorData } = validatedPayload.data
     const payloadData = {
         password,
         doctor: doctorData
@@ -86,7 +85,15 @@ export const getAllDoctors = async (queryString?: string) => {
 export async function updateDoctor(id: string, _prevState: any, formData: FormData) {
     const experienceValue = formData.get("experience");
     const appointmentFeeValue = formData.get("appointmentFee");
+    const specialtiesData = formData.get("specialities") as string
 
+    const specialties = JSON.parse(specialtiesData);
+    if (!specialtiesData && !Array.isArray(specialties) && specialties.length < 1) {
+        return {
+            success: false,
+            message: "At least one specialty is required",
+        }
+    }
 
     const validationPayload: Partial<IDoctor> = {
         name: formData.get("name") as string,
@@ -99,33 +106,36 @@ export async function updateDoctor(id: string, _prevState: any, formData: FormDa
         qualification: formData.get("qualification") as string,
         currentWorkingPlace: formData.get("currentWorkingPlace") as string,
         designation: formData.get("designation") as string,
+        specialties: specialties
     };
 
     // Parse specialties array (for adding new specialties)
-    const specialtiesValue = formData.get("specialties") as string;
-    if (specialtiesValue) {
-        try {
-            const parsed = JSON.parse(specialtiesValue);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-                validationPayload.specialties = parsed;
-            }
-        } catch {
-            // Ignore invalid JSON
-        }
-    }
+    // const specialtiesValue = formData.get("specialties") as string;
+    // if (specialtiesValue) {
+    //     try {
+    //         const parsed = JSON.parse(specialtiesValue);
+    //         if (Array.isArray(parsed) && parsed.length > 0) {
+    //             validationPayload.specialties = parsed;
+    //         }
+    //     } catch {
+    //         // Ignore invalid JSON
+    //     }
+    // }
 
     // Parse removeSpecialties array (for removing existing specialties)
-    const removeSpecialtiesValue = formData.get("removeSpecialties") as string;
-    if (removeSpecialtiesValue) {
-        try {
-            const parsed = JSON.parse(removeSpecialtiesValue);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-                validationPayload.removeSpecialties = parsed;
-            }
-        } catch {
-            // Ignore invalid JSON
-        }
-    }
+    
+    // const removeSpecialtiesValue = formData.get("removeSpecialties") as string;
+    // if (removeSpecialtiesValue) {
+    //     try {
+    //         const parsed = JSON.parse(removeSpecialtiesValue);
+    //         if (Array.isArray(parsed) && parsed.length > 0) {
+    //             validationPayload.removeSpecialties = parsed;
+    //         }
+    //     } catch {
+    //         // Ignore invalid JSON
+    //     }
+    // }
+
     const validatedPayload = zodValidate(validationPayload, updateDoctorZodSchema);
 
     if (!validatedPayload.success && validatedPayload.errors) {
@@ -144,6 +154,8 @@ export async function updateDoctor(id: string, _prevState: any, formData: FormDa
             formData: validationPayload,
         }
     }
+
+    console.log(validatedPayload.data, "validatedPayload.data")
 
     try {
         const response = await serverFetch.patch(`/doctor/${id}`, {

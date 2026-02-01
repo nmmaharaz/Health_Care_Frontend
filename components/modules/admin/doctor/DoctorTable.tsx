@@ -65,7 +65,8 @@ export default function DoctorTable({ doctor, specialities }: IDoctorProps) {
             </ManagementTable>
 
             <CreateDoctor
-                 open={!!editingDoctor}
+                key={editingDoctor ? 'open' : 'closed'}
+                open={!!editingDoctor}
                 onClose={() => setEditingDoctor(null)}
                 doctor={editingDoctor!}
                 specialities={specialities}
@@ -75,25 +76,11 @@ export default function DoctorTable({ doctor, specialities }: IDoctorProps) {
                 }}
             ></CreateDoctor>
 
-            {/* <DoctorEditInfo
-                open={!!editingDoctor}
-                onClose={() => setEditingDoctor(null)}
-                doctor={editingDoctor!}
-                specialities={specialities}
-                onSuccess={() => {
-                    setEditingDoctor(null);
-                    handleRefresh();
-                }}
-            /> */}
-
-            {/* View Doctor Detail Dialog */}
             <DoctorViewDetailDialog
                 open={!!viewingDoctor}
                 onClose={() => setViewingDoctor(null)}
                 doctor={viewingDoctor}
             />
-
-
 
             <DeleteConfirmationDialog
                 open={!!deletingDoctor}

@@ -43,7 +43,7 @@ export const createDoctorZodSchema = z.object({
     qualification: z.string().min(1, "Qualification is required").min(3, "Qualification must be at least 3 characters long"),
     currentWorkingPlace: z.string().min(1, "Current Working Place is required").min(3, "Current Working Place must be at least 3 characters long"),
     designation: z.string().min(1, "Designation is required").min(2, "Designation must be at least 2 characters long"),
-    specialties: z.array(z.string("Each specialty must be a valid title")).min(1, "At least one specialty is required"),
+    specialties: z.array(z.string("Each specialty must be a valid title")).min(1, "At least one specialty is required")
 });
 
 
@@ -59,6 +59,5 @@ export const updateDoctorZodSchema = z.object({
     qualification: z.string().min(3, "Qualification must be at least 3 characters long").optional(),
     currentWorkingPlace: z.string().min(3, "Current Working Place must be at least 3 characters long").optional(),
     designation: z.string().min(2, "Designation must be at least 2 characters long").optional(),
-    specialties: z.array(z.uuid("Each specialty must be a valid UUID")).optional(),
-    removeSpecialties: z.array(z.uuid("Each specialty to remove must be a valid UUID")).optional(),
+    specialties: z.array(z.string("Each specialty must be a valid title")).min(1, "At least one specialty is required")
 });
