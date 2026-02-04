@@ -8,7 +8,6 @@ import { doctorsColumns } from "./DoctorColumn"
 import { IDoctor, IDoctorProps } from "@/types/admin/doctor.interface"
 import { deleteDoctor } from "@/service/admin/doctorManagement"
 import DoctorViewDetailDialog from "./DoctorViewDetailDialog"
-import DoctorEditInfo from "./DoctorEditInfo"
 import CreateDoctor from "./CreateDoctor"
 
 export default function DoctorTable({ doctor, specialities }: IDoctorProps) {

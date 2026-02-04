@@ -31,6 +31,10 @@ export interface IDoctor {
     }>;
 }
 
+export interface IDoctorsProps {
+    doctor: IDoctor[],
+}
+
 export interface IDoctorProps {
     doctor: IDoctor[],
     specialities:ISpecialty[]

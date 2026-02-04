@@ -15,7 +15,7 @@ export const navItems = (role: UserRole): NavItem[] => {
   // };
   return [
     { name: 'Home', href: '/' },
-    { name: 'Doctors', href: '/doctors' },
+    { name: 'Doctors', href: '/consultation' },
     {
       name: 'Healthcare',
       href: '/healthcare',

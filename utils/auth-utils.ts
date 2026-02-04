@@ -5,7 +5,7 @@ export type RouteConfig = {
 
 export type UserRole = "ADMIN" | "DOCTOR" | "PATIENT";
 
-export const authRoutes = ["/login", "/register", "/forgot-password", "/reset-password"];
+export const authRoutes = ["/login", "/register", "/forgot-password", "/reset-password", "/consultation"];
 
 export const isAuthRoute = (pathname: string) => {
     return authRoutes.some((route: string) => route === pathname);
