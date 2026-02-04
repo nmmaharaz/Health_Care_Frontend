@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import { ShieldUser } from 'lucide-react';
 
 // Props Interface
 interface ServiceProps {

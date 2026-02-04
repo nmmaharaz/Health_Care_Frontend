@@ -70,6 +70,7 @@ export const createDoctor = async (_previewState: any, formData: FormData) => {
 }
 
 export const getAllDoctors = async (queryString?: string) => {
+    console.log(queryString)
     try {
         const response = await serverFetch.get(`/doctor${queryString ? `?${queryString}` : ""}`)
         return await response.json()

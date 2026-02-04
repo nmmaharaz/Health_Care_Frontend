@@ -99,7 +99,7 @@ export default function PublicNavbar({ user }: { user: IUserInfo }) {
                 <Link
                   prefetch={false}
                   href={item.href}
-                  className="text-foreground flex items-center space-x-1 font-medium transition-colors duration-200 hover:text-rose-500"
+                  className="text-foreground flex items-center space-x-1 font-medium transition-colors duration-200 hover:text-[#4338ca]"
                 >
                   <span>{item.name}</span>
                   {item.hasDropdown && (
@@ -217,7 +217,7 @@ export default function PublicNavbar({ user }: { user: IUserInfo }) {
                     <Link
                       prefetch={false}
                       href="/signup"
-                      className="block w-full rounded-lg bg-linear-to-r from-rose-500 to-rose-700 py-2.5 text-center font-medium text-white transition-all duration-200 hover:shadow-lg"
+                      className="block w-full rounded-lg bg-linear-to-br bg-[#4338ca], bg-[#4f6ad4f1] py-2.5 text-center font-medium text-white transition-all duration-200 hover:shadow-lg"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Get Started

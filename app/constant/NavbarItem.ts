@@ -1,4 +1,4 @@
-import { getDefaultDashboardRoute, UserRole } from "@/utils/auth-utils";
+import { UserRole } from "@/utils/auth-utils";
 
 interface NavItem {
   name: string;
@@ -8,28 +8,28 @@ interface NavItem {
 }
 
 export const navItems = (role: UserRole): NavItem[] => {
-  let defaultDashboard
-  if (role) {
-    defaultDashboard = getDefaultDashboardRoute(role)
-  };
+  console.log('User Role in navItems:', role);
+  // let defaultDashboard
+  // if (role) {
+  //   defaultDashboard = getDefaultDashboardRoute(role)
+  // };
   return [
     { name: 'Home', href: '/' },
-    { name: 'Features', href: '/features' },
-
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'About', href: '/about' },
-    role ? {
-      name: 'Profile',
-      href: '/my-profile',
+    { name: 'Doctors', href: '/doctors' },
+    {
+      name: 'Healthcare',
+      href: '/healthcare',
       hasDropdown: true,
       dropdownItems: [
-        {
-          name: 'Dashboard',
-          href: defaultDashboard as string,
-          description: 'Manage your data',
-        },
-        { name: 'Reports', href: '/reports', description: 'Generate insights' },
-      ],
-    }:null,
+        { name: 'NGOs', href: '/ngos', description: 'Generate insights' },
+        { name: 'Hospitals', href: '/hospitals', description: 'Generate insights' },
+        { name: 'Medicine', href: '/medicine', description: 'Manage your account' },
+        { name: 'Blood Donation', href: '/blood-donation', description: 'Manage your account' },
+
+      ]
+    },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Contact', href: '/contact' }
+
   ].filter(Boolean) as NavItem[]
 };
