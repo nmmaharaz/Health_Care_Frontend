@@ -1,5 +1,5 @@
-export default function page() {
+export default function DoctorDashboardPage() {
   return (
-    <div>page</div>
+    <div>Doctor Dashboard Page</div>
   )
 }

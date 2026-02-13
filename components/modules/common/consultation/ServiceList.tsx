@@ -3,7 +3,7 @@ const services = [
   "HEMATOLOGY", "NEUROLOGY", "RHINOLOGY", "OPHTHALMOLOGY", "PULMONARY"
 ];
 
-const ServiceList = () => {
+const ConsultationList = () => {
   return (
     <div className="sticky top-0 w-full lg:max-w-sm bg-white rounded-[40px] shadow-sm border border-slate-50 p-8">
       {/* Title */}
@@ -43,4 +43,4 @@ const ServiceList = () => {
   );
 };
 
-export default ServiceList;
+export default ConsultationList;

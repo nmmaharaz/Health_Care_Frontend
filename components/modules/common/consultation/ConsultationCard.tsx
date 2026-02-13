@@ -2,7 +2,7 @@ import styles from '@/css/Hero.module.css';
 import Card from './Card';
 import { IDoctorsProps } from '@/types/admin/doctor.interface';
 
-export default function DoctorsCard({doctor}:IDoctorsProps) {
+export default function ConsultationCard({doctor}:IDoctorsProps) {
 
   return (
     <div className="min-h-screen rounded-[30px] bg-[#f4f6ff]">
@@ -20,7 +20,9 @@ export default function DoctorsCard({doctor}:IDoctorsProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {doctor?.map((service, index) => (
             <Card
+              doctor={service}
               key={Number(index)}
+              id={service.id}
               name={service.name}
               qalification={service.qualification}
               icon=""

@@ -1,5 +1,29 @@
-export default function page() {
+import DoctorAppointmentsTable from "@/components/modules/doctor/appoinment/DoctorAppoinmentsTable";
+import { TableSkeleton } from "@/components/shared/Dashboard/TableSkeleton";
+import { getMyAppointments } from "@/service/doctor/appoinment.service";
+import { IAppointment } from "@/types/doctor/appointment.interface";
+import { Suspense } from "react";
+
+async function AppointmentsContent() {
+  const response = await getMyAppointments();
+  const appointments: IAppointment[] = response?.data?.data || [];
+
+  return <DoctorAppointmentsTable appointments={appointments} />;
+}
+
+export default async function DoctorAppointmentsPage() {
   return (
-    <div>page</div>
-  )
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">My Appointments</h1>
+        <p className="text-muted-foreground mt-2">
+          Manage your patient appointments and prescriptions
+        </p>
+      </div>
+
+      <Suspense fallback={<TableSkeleton columns={8} rows={10} />}>
+        <AppointmentsContent />
+      </Suspense>
+    </div>
+  );
 }

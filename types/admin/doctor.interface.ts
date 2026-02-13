@@ -1,5 +1,23 @@
 import { ISpecialty } from "./secialities.interface";
 
+export interface ISchedule {
+  id: string;
+  startDateTime: string; 
+  endDateTime: string;   
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IDoctorSchedule {
+  doctorId: string;
+  scheduleId: string;
+  isBooked: boolean;
+  createdAt: string;
+  updatedAt: string;
+  schedule: ISchedule;
+}
+
+
 export interface IDoctor {
     id?: string;
     name: string;
@@ -29,6 +47,7 @@ export interface IDoctor {
             icon?: string;
         };
     }>;
+    doctorSchedules?: IDoctorSchedule[];
 }
 
 export interface IDoctorsProps {

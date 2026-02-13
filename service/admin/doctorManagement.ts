@@ -70,7 +70,6 @@ export const createDoctor = async (_previewState: any, formData: FormData) => {
 }
 
 export const getAllDoctors = async (queryString?: string) => {
-    console.log(queryString)
     try {
         const response = await serverFetch.get(`/doctor${queryString ? `?${queryString}` : ""}`)
         return await response.json()
@@ -80,6 +79,21 @@ export const getAllDoctors = async (queryString?: string) => {
             success: false,
             message: "Something went wrong"
         }
+    }
+}
+
+
+export async function getDoctorById(id: string) {
+    try {
+        const response = await serverFetch.get(`/doctor/${id}`)
+        // console.log(await response.json(), "Doctor By ID Response")
+        return await response.json();
+    } catch (error: any) {
+        console.log(error);
+        return {
+            success: false,
+            message: `${process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'}`
+        };
     }
 }
 
@@ -124,7 +138,7 @@ export async function updateDoctor(id: string, _prevState: any, formData: FormDa
     // }
 
     // Parse removeSpecialties array (for removing existing specialties)
-    
+
     // const removeSpecialtiesValue = formData.get("removeSpecialties") as string;
     // if (removeSpecialtiesValue) {
     //     try {
@@ -155,8 +169,6 @@ export async function updateDoctor(id: string, _prevState: any, formData: FormDa
             formData: validationPayload,
         }
     }
-
-    console.log(validatedPayload.data, "validatedPayload.data")
 
     try {
         const response = await serverFetch.patch(`/doctor/${id}`, {

@@ -8,14 +8,13 @@ interface NavItem {
 }
 
 export const navItems = (role: UserRole): NavItem[] => {
-  console.log('User Role in navItems:', role);
   // let defaultDashboard
   // if (role) {
   //   defaultDashboard = getDefaultDashboardRoute(role)
   // };
   return [
     { name: 'Home', href: '/' },
-    { name: 'Doctors', href: '/consultation' },
+    { name: 'Doctors', href: '/consultation/doctor' },
     {
       name: 'Healthcare',
       href: '/healthcare',

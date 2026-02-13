@@ -15,7 +15,6 @@ export const createSpecialities = async (file:any, _previewState: any, formData:
         }
 
         const validatedPayload = zodValidate(payload, createSpecialityZodSchema).data;
-        console.log(validatedPayload)
         const newFormData = new FormData()
         newFormData.append("data", JSON.stringify(validatedPayload))
 

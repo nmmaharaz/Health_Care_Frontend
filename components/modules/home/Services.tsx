@@ -25,7 +25,7 @@ export default function Category() {
   ];
 
   return (
-    <div className="min-h-screen mt-220 md:mt-84 lg:mt-82 py-20 mx-7.5 rounded-[30px] bg-[#f4f6ff]">
+    <div className="min-h-screen mt-220 md:mt-84 lg:mt-82 py-20 mx-7.5 rounded-[40px] bg-[#f4f6ff]">
       <div className='flex justify-center'>
         <div className={`${styles.badge}`}>
           <span className='text-2xl'>🩺</span>

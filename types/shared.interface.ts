@@ -21,7 +21,8 @@ export interface SelectFilterProps {
 export interface Column<T> {
     header: string,
     accessor: keyof T | ((row: T) => React.ReactNode)
-    className?: string
+    className?: string,
+    sortKey?: string,
 }
 
 export interface ManagementTableProps<T> {

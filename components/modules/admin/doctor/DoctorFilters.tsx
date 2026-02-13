@@ -1,4 +1,5 @@
 "use client";
+import ClearFiltersButton from "@/components/shared/Dashboard/ClearFiltersButton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -192,7 +193,7 @@ const DoctorFilters = ({ specialties }: DoctorsFilterProps) => {
               <SelectItem value="FEMALE">Female</SelectItem>
             </SelectContent>
           </Select>
-        {activeFiltersCount > 0 && (
+        {/* {activeFiltersCount > 0 && (
           <Button
             variant="ghost"
             onClick={clearAllFilters}
@@ -202,7 +203,8 @@ const DoctorFilters = ({ specialties }: DoctorsFilterProps) => {
             <X className="h-4 w-4 mr-1" />
             Clear ({activeFiltersCount})
           </Button>
-        )}
+        )} */}
+        <ClearFiltersButton></ClearFiltersButton>
       </div>
 
       {/* Row 3: Active Specialty Badges - Fixed Height to Prevent Shift */}

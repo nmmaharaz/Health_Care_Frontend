@@ -1,16 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const DoctorHeader = () => {
+const ConsultationHeader = () => {
   return (
-    <div className="w-full p-4 md:p-7.5 bg-white">
-      {/* Container with rounded corners like your image */}
-      <div className="relative w-full min-h-100 rounded-[40px] overflow-hidden bg-[#f4f9ff]">
+    <div className="w-full p-4 md:p-7.5">
+      <div className="relative w-full min-h-100 rounded-[40px] overflow-hidden bg-[#f4f6ff]">
         
 
         <div className="">
           <Image
-            src="/assets/image/hero/doctorheader.jpg" 
+            src="/assets/image/hero/cosultation banner.jpeg" 
             alt="All Service Doctors"
             fill
             className="object-cover object-right md:object-center opacity-80"
@@ -62,4 +61,4 @@ const DoctorHeader = () => {
   );
 };
 
-export default DoctorHeader;
+export default ConsultationHeader;

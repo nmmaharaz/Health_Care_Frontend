@@ -6,7 +6,6 @@ import { useActionState } from 'react';
 
 const LoginForm = ({ redirect }: { redirect?: string }) => {
   const [state, formAction, isPending] = useActionState(loginUser, null)
-  console.log(state)
 
   return (
     <section className="max-w-7xl mx-auto py-10 px-6">

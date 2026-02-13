@@ -61,7 +61,6 @@ const SpecialtyMultiSelect = ({
       {selectedSpecialtyIds?.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-3 p-3 bg-muted rounded-lg">
           {selectedSpecialtyIds?.map((id) =>{
-            console.log(id, "Ids")
             return  (
             <Badge key={id} variant="secondary" className="px-3 py-1.5 text-sm">
               {getSpecialtyTitle(id)}
