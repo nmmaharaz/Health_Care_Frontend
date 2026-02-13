@@ -20,7 +20,7 @@ import {
   Phone,
   User,
 } from "lucide-react";
-import InfoRow from "../../common/consultation/InfoRow";
+import InfoRow from "../../common/consultation/doctor/InfoRow";
 
 interface IPatientViewDialogProps {
   open: boolean;

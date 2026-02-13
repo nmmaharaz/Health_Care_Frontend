@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { House, SettingsIcon, UserIcon } from "lucide-react";
+import { KeyRound, SettingsIcon, UserIcon } from "lucide-react";
 import DashboardLogout from "./DashboardLogout";
 import Link from "next/link";
 
@@ -8,7 +8,7 @@ export default function UserProfileDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center gap-2">
+        <div className="flex cursor-pointer items-center gap-2">
           <div className='flex items-center gap-3'>
             <Avatar>
               <AvatarImage
@@ -32,15 +32,22 @@ export default function UserProfileDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <Link href="/">
-        <DropdownMenuItem>
+          {/* <DropdownMenuItem>
           <House />
           Home
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         </Link>
         <Link href="/my-profile">
           <DropdownMenuItem>
             <UserIcon />
             Profile
+          </DropdownMenuItem>
+        </Link>
+        <Link href="/my-profile">
+          <DropdownMenuItem>
+            {/* <UserIcon /> */}
+            <KeyRound />
+            Change Password
           </DropdownMenuItem>
         </Link>
         <DropdownMenuItem>

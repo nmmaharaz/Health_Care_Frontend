@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
+import { Menu, X, ChevronDown, Sparkles, LayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import styles from '../../css/Hero.module.css';
@@ -10,10 +10,16 @@ import { IUserInfo } from '@/types/user';
 import { handleLogout } from '@/utils/handleLogout';
 import { UserRole } from '@/utils/auth-utils';
 import { navItems } from '@/app/constant/NavbarItem';
+import { Button } from '../ui/button';
+import UserProfileDropdown from '../modules/dashboard/UserProfileDropdown';
 
-export default function PublicNavbar({ user }: { user: IUserInfo }) {
+export default function PublicNavbar({ user, dashboardRoute }: { user: IUserInfo, dashboardRoute:string }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // const dashboardRoute = initialDashboardRoute
+  //  const dashboardRoute = userInfo
+  //   ? getDefaultDashboardRoute(userInfo.role)
+  //   : "/";
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { theme } = useTheme();
 
@@ -144,10 +150,17 @@ export default function PublicNavbar({ user }: { user: IUserInfo }) {
           </nav>
 
           {user?.email ?
-            (<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <button onClick={() => handleLogout()} className={`${styles.btn} ${styles.primary}`}>
+            (<motion.div className='flex flex-row gap-x-5'>
+              <Link href={dashboardRoute}>
+                <Button variant="outline" className="gap-2">
+                  <LayoutDashboard className="h-4 w-4" />
+                  Dashboard
+                </Button>
+              </Link>
+              <UserProfileDropdown></UserProfileDropdown>
+              {/* <button onClick={() => handleLogout()} className={`${styles.btn} ${styles.primary}`}>
                 Logout
-              </button>
+              </button> */}
             </motion.div>) :
             (<div className="hidden items-center space-x-4 lg:flex">
               <Link
