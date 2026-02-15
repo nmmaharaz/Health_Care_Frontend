@@ -84,6 +84,7 @@ export async function getMyAppointments(queryString?: string) {
         // }
         );
         const result = await response.json();
+        // console.log(result, "Result")
         return result;
     } catch (error: any) {
         console.error("Error fetching appointments:", error);
@@ -179,6 +180,35 @@ export async function changeAppointmentStatus(
                 process.env.NODE_ENV === "development"
                     ? error.message
                     : "Failed to change appointment status",
+        };
+    }
+}
+
+export async function getAppointments(queryString?: string) {
+    try {
+        // const searchParams = new URLSearchParams(queryString);
+        // const page = searchParams.get("page") || "1";
+        // const status = searchParams.get("status") || "all";
+        const response = await serverFetch.get(`/appointment${queryString ? `?${queryString}` : ""}`
+        //     , 
+        //     {
+        //     next: {
+        //         tags: [
+        //             "appointments-list",
+        //             `appointments-page-${page}`,
+        //             `appointments-status-${status}`,
+        //         ],
+        //         revalidate: 120, // real-time appointment updates for critical data
+        //     },
+        // }
+    );
+        const result = await response.json();
+        return result;
+    } catch (error: any) {
+        console.log(error);
+        return {
+            success: false,
+            message: `${process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'}`
         };
     }
 }
