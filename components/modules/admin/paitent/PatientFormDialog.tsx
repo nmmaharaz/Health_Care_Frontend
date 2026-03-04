@@ -32,7 +32,6 @@ const PatientFormDialog = ({
     updatePatient.bind(null, patient?.id as string),
     null
   );
-  console.log("PatientFormDialog state:", state, "formAction:", formAction, "isPending:", isPending);
   const prevStateRef = useRef(state);
 
   // Handle success/error from server
