@@ -22,7 +22,6 @@ export default function CreateDoctor({ specialities, open, onClose, doctor, onSu
         }
         return [];
     });
-    console.log(specialitiesData, "specialitiesData")
 
     const isEdit = !!doctor;
     const [state, formAction, pending] = useActionState(
