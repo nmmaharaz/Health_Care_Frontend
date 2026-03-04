@@ -21,7 +21,6 @@ export const createSpecialities = async (file:any, _previewState: any, formData:
         if (file) {
             newFormData.append("file", file as Blob) 
         }
-        console.log(newFormData)
         const response = await serverFetch.post("/specialties", {
             body: newFormData
         })
