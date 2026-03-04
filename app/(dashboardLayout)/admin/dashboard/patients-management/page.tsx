@@ -15,7 +15,6 @@ export default async function PatientManagementPage({
   const searchParamsObj = await searchParams;
   const queryString = queryStringFormatter(searchParamsObj)
   const { data } = await getAllPatients(queryString)
-  console.log("Patients data in PatientManagementPage:", data);
   const totalPages = Math.ceil(
     (data?.meta?.total || 1) / (data?.meta?.limit || 1)
   );
