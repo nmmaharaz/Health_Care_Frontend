@@ -14,7 +14,6 @@ const AppointmentsManagementPage = async ({
   const searchParamsObj = await searchParams;
   const queryString = queryStringFormatter(searchParamsObj);
   const response = await getAppointments(queryString);
-  console.log(response, "Response DAta")
 
   return (
     <div className="space-y-6">
