@@ -26,7 +26,6 @@ export default async function page({
 
   if (!doctorResponse?.success || !scheduleResponse?.success) {
     // NotFound();
-    // console.error('Failed to fetch doctor or schedule data');
     return <div>Error fetching data. Please try again later.</div>;
   }
 
