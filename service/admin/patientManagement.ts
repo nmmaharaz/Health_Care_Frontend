@@ -14,7 +14,6 @@ export async function getAllPatients(queryString?: string) {
         // const page = searchParams.get("page") || "1";
         // const searchTerm = searchParams.get("searchTerm") || "all";
         const response = await serverFetch.get(`/patient${queryString ? `?${queryString}` : ""}`);
-        // console.log("Fetch patients response:", await response.json());
         const result = await response.json();
         return result;
     } catch (error: any) {
