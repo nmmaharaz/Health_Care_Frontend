@@ -16,7 +16,6 @@ interface MySchedulesHeaderProps {
 
 
 const MySchedulesFilters = ({ availableSchedules }: MySchedulesHeaderProps) => {
-    // console.log("Available Schedules in Filters:", availableSchedules);
     const router = useRouter();
     const [, startTransition] = useTransition();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
