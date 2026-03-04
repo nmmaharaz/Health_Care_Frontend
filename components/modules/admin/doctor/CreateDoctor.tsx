@@ -15,7 +15,6 @@ import { toast } from "sonner";
 
 
 export default function CreateDoctor({ specialities, open, onClose, doctor, onSuccess }: IDoctorFormDialogProps) {
-    // console.log(doctor?.doctorSpecialties?.specialities, "doctor.doctorSpecialties")
     const [specialitiesData, setSpecialitiesData] = useState<string[]>(() => {
         if (doctor?.doctorSpecialties) {
             return doctor?.doctorSpecialties
