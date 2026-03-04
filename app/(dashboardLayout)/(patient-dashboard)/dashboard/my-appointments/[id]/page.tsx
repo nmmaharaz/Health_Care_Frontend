@@ -14,7 +14,6 @@ export default async function AppointmentDetailPage({
   params,
 }: AppointmentDetailPageProps) {
   const { id } = await params;
-  console.log(id, "data")
 
   const response = await getAppointmentById(id);
 
