@@ -12,7 +12,6 @@ import PatientViewDetailDialog from "./PatientViewDetailDialog";
 import DeleteConfirmationDialog from "@/components/shared/Dashboard/DeleteConfirmationDialog";
 
 const PatientsTable = ({ patients }: PatientsTableProps) => {
-  console.log("Patients data in PatientsTable:", patients);
   const router = useRouter();
   const [, startTransition] = useTransition();
   const [deletingPatient, setDeletingPatient] = useState<IPatient | null>(null);
