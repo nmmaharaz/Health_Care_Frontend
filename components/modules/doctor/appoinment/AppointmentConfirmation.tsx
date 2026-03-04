@@ -29,7 +29,6 @@ const AppointmentConfirmation = ({
   doctor,
   schedule,
 }: AppointmentConfirmationProps) => {
-  console.log(schedule, "Schedule in Appointment Confirmation");
   const router = useRouter();
   const [isPayingNow, setIsPayingNow] = useState(false);
   const [isPayingLater, setIsPayingLater] = useState(false);
