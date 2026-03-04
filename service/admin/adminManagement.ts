@@ -158,7 +158,6 @@ export async function updateAdmin(id: string, _prevState: any, formData: FormDat
     */
 
     const validation = zodValidate(validationPayload, updateAdminZodSchema);
-    // console.log(validation, "Validation")
     if (!validation.success && validation.errors) {
         return {
             success: validation.success,
