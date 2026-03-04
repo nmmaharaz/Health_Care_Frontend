@@ -62,7 +62,7 @@ export default function CreateDoctor({ specialities, open, onClose, doctor, onSu
                     <DialogHeader className="pb-4">
                         <DialogTitle>Doctor Profile</DialogTitle>
                     </DialogHeader>
-                    <div className="max-h-[85vh] overflow-y-auto relative">
+                    <div className="max-h-[70vh] lg:max-h-[85vh] overflow-y-auto relative">
                         <form
                             action={formAction}
                             className="grid grid-cols-1 px-2 md:grid-cols-2 gap-3"
@@ -156,8 +156,8 @@ export default function CreateDoctor({ specialities, open, onClose, doctor, onSu
                                             state?.formData?.gender || (isEdit ? doctor?.gender : "")
                                         }
                                         name="gender">
-                                        <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select Gender" />
+                                        <SelectTrigger className="w-full ">
+                                            <SelectValue placeholder="Select a category" />
                                         </SelectTrigger>
                                         <SelectContent
                                             position={"popper"}

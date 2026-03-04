@@ -10,8 +10,7 @@ async function PrescriptionsContent() {
   const appointments: IAppointment[] = response?.data || [];
 
   // Extract prescriptions from appointments that have them
-  const prescriptions: IPrescription[] = appointments
-    .filter((appointment) => appointment.prescription) // Only appointments with prescriptions
+  const prescriptions: IPrescription[] = appointments?.filter((appointment) => appointment?.prescription) // Only appointments with prescriptions
     .map((appointment) => ({
       ...appointment.prescription!,
       patient: appointment.patient, // Add patient data from appointment

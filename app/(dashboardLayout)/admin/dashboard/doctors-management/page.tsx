@@ -26,7 +26,7 @@ export default async function DoctorManagementPage({
       <DashboardHeader title="Doctor Management" subtitle="Manage doctor information and details"></DashboardHeader>
       <DoctorTableHeader specialities={specialities.data}></DoctorTableHeader>
       <Suspense fallback={<TableSkeleton columns={2} rows={10}></TableSkeleton>}>
-        <DoctorTable doctor={data.data} specialities={specialities.data}></DoctorTable>
+        <DoctorTable doctor={data?.data} specialities={specialities.data}></DoctorTable>
       </Suspense>
       <TablePagination
         currentPage={data?.meta?.page || 1}
