@@ -3,7 +3,6 @@ import { getUserInfo } from "@/service/auth/user";
 
 const MyProfilePage = async () => {
   const userInfo = await getUserInfo();
-  console.log(userInfo, )
   return <MyProfile userInfo={userInfo!} />;
 };
 
