@@ -35,7 +35,6 @@ export default function BookScheduleDialog({
   const [availableSchedulesState, setAvailableSchedules] = useState<ISchedule[]>(
     availableSchedules
   );
-//   console.log("Available Schedules in BookScheduleDialogdgfdgdf:", availableSchedulesState);
   const [selectedSchedules, setSelectedSchedules] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingSchedules, setLoadingSchedules] = useState(false);
