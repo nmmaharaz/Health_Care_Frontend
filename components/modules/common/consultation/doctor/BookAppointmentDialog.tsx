@@ -44,7 +44,6 @@ export default function BookAppointmentDialog({
 
         doctorSchedules.forEach((schedule: any) => {
             if (!schedule.schedule?.startDateTime) return;
-            // console.log("Processing schedule:", schedule);
 
             if (schedule?.isBooked) return
 
