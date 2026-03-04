@@ -96,7 +96,6 @@ export async function getAdmins(queryString?: string) {
         // }
     );
         const result = await response.json();
-        // console.log(result,"Resultjsldf")
         return result;
     } catch (error: any) {
         console.log(error);
