@@ -86,7 +86,6 @@ export const getAllDoctors = async (queryString?: string) => {
 export async function getDoctorById(id: string) {
     try {
         const response = await serverFetch.get(`/doctor/${id}`)
-        // console.log(await response.json(), "Doctor By ID Response")
         return await response.json();
     } catch (error: any) {
         console.log(error);
