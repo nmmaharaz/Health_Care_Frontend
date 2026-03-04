@@ -67,8 +67,6 @@ export default function AIDoctorSuggestion() {
     }
   };
 
-console.log(suggestedDoctors, "sowUsdjfksdjf")
-
   return (
     <Card className="bg-white shadow-sm rounded-3xl">
       <CardHeader>
