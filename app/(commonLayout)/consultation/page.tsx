@@ -5,7 +5,6 @@ import { getAllDoctors } from "@/service/admin/doctorManagement";
 
 export default async function ConsultationPage() {
   const { data } = await getAllDoctors();
-  // console.log("Doctor Data in Consultation Page:", data);
   return (
     <div>
       <ConsultationHeader></ConsultationHeader>
